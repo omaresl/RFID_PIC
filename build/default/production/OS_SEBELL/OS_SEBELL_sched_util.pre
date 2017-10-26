@@ -1,0 +1,30 @@
+
+# 1 "OS_SEBELL/OS_SEBELL_sched_util.c"
+
+# 12 "OS_SEBELL/OS_SEBELL_sched_cfg.h"
+typedef unsigned short T_SCH_CNT;
+
+# 18 "OS_SEBELL/OS_SEBELL_sched_util.h"
+unsigned char sched_util_task_finder(T_SCH_CNT sch_counter);
+
+# 12 "OS_SEBELL/OS_SEBELL_sched_util.c"
+unsigned char sched_util_task_finder(T_SCH_CNT sch_counter)
+{
+
+unsigned char lub_ExitFlag = 0x01;
+
+unsigned char lub_TaskIndex = 0x00;
+
+for(lub_TaskIndex = 0; (lub_TaskIndex < ((sizeof(T_SCH_CNT)*8) - 1)) && (lub_ExitFlag == 0x01); lub_TaskIndex++)
+{
+
+if(((sch_counter >> lub_TaskIndex) & 0x01) == 0x01)
+{
+
+lub_ExitFlag = 0x00;
+}
+}
+
+return(lub_TaskIndex - 1);
+}
+
