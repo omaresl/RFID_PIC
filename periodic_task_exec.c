@@ -3,44 +3,36 @@
 #include "app/app_LED.h"
 #include "app/app_RC522.h"
 
-void periodic_task_tk(void)
-{
+void periodic_task_tk(void) {
     return;
 }
 
-void periodic_task_2tk(void)
-{
+void periodic_task_2tk(void) {
     return;
 }
 
-void periodic_task_4tk(void)
-{
+void periodic_task_4tk(void) {
     return;
 }
 
-void periodic_task_8tk(void)
-{
+void periodic_task_8tk(void) {
     //app_RC522_TaskMng();
     return;
 }
 
-void periodic_task_32tk(void)
-{
+void periodic_task_32tk(void) {
     return;
 }
 
-void periodic_task_512tk(void)
-{
+void periodic_task_512tk(void) {
+    return;
+}
+
+void periodic_task_1024tk(void) {
     app_LED_Task();
     return;
 }
 
-void periodic_task_1024tk(void)
-{
-    return;
-}
-
-void TASK_DUMMY(void)
-{
+void TASK_DUMMY(void) {
     return;
 }

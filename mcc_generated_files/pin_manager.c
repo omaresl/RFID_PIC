@@ -65,7 +65,7 @@ void PIN_MANAGER_Initialize(void)
     TRISE = 0x07;
     TRISA = 0xFF;
     TRISB = 0x78;
-    TRISC = 0xFF;
+    TRISC = 0xBF;
     TRISD = 0xFF;
 
     /**
@@ -99,6 +99,21 @@ void PIN_MANAGER_Initialize(void)
 
    
     
+    
+    bool state = GIE;
+    GIE = 0;
+    PPSLOCK = 0x55;
+    PPSLOCK = 0xAA;
+    PPSLOCKbits.PPSLOCKED = 0x00; // unlock PPS
+
+    RX1PPSbits.RXPPS = 0x17;   //RC7->EUSART1:RX1;
+    RC6PPS = 0x09;   //RC6->EUSART1:TX1;
+
+    PPSLOCK = 0x55;
+    PPSLOCK = 0xAA;
+    PPSLOCKbits.PPSLOCKED = 0x01; // lock PPS
+
+    GIE = state;
 }       
 
 void PIN_MANAGER_IOC(void)

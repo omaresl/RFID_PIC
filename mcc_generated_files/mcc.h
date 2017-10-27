@@ -50,8 +50,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "interrupt_manager.h"
-#include "tmr1.h"
 #include "memory.h"
+#include "tmr1.h"
+#include "eusart1.h"
 
 #define _XTAL_FREQ  64000000
 
