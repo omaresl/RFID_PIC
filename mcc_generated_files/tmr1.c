@@ -50,6 +50,7 @@
 #include <xc.h>
 #include "tmr1.h"
 #include "../OS_SEBELL/OS_SEBELL_sched.h"
+#include "../Headers/stdtypedef.h"
 
 /**
   Section: Global Variables Definitions
@@ -77,11 +78,11 @@ void TMR1_Initialize(void)
     //CS FOSC/4; 
     T1CLK = 0x01;
 
-    //TMR1H 252; 
-    TMR1H = 0xFC;
+    //TMR1H 224; 
+    TMR1H = 0xE0;
 
-    //TMR1L 224; 
-    TMR1L = 0xE0;
+    //TMR1L 192; 
+    TMR1L = 0xC0;
 
     // Load the TMR value to reload variable
     timer1ReloadVal=(TMR1H << 8) | TMR1L;
@@ -189,7 +190,8 @@ void TMR1_SetInterruptHandler(void* InterruptHandler){
 void TMR1_DefaultInterruptHandler(void){
     // add your TMR1 interrupt custom code
     // or set custom function using TMR1_SetInterruptHandler()
-    sch_alarm = 0x01;
+    TMR1IF = FALSE;
+    sch_alarm = TRUE;
 }
 
 /**

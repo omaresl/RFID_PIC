@@ -52,7 +52,7 @@
 // CONFIG1H
 #pragma config CLKOUTEN = OFF    // ->CLKOUT function is disabled
 #pragma config CSWEN = ON    // ->Writing to NOSC and NDIV is allowed
-#pragma config FCMEN = ON    // Fail-Safe Clock Monitor Enable bit->Fail-Safe Clock Monitor enabled
+#pragma config FCMEN = OFF    // Fail-Safe Clock Monitor Enable bit->Fail-Safe Clock Monitor disabled
 
 // CONFIG2L
 #pragma config MCLRE = EXTMCLR    // ->If LVP = 0, MCLR pin is MCLR; If LVP = 1, RE3 pin function is MCLR 
@@ -65,7 +65,7 @@
 #pragma config ZCD = OFF    // ZCD Disable bit->ZCD disabled. ZCD can be enabled by setting the ZCDSEN bit of ZCDCON
 #pragma config PPS1WAY = ON    // PPSLOCK bit One-Way Set Enable bit->PPSLOCK bit can be cleared and set only once; PPS registers remain locked after one clear/set cycle
 #pragma config STVREN = ON    // Stack Full/Underflow Reset Enable bit->Stack full/underflow will cause Reset
-#pragma config DEBUG = OFF    // Debugger Enable bit->Background debugger disabled
+#pragma config DEBUG = ON    // Debugger Enable bit->Background debugger enabled
 #pragma config XINST = OFF    // Extended Instruction Set Enable bit->Extended Instruction Set and Indexed Addressing Mode disabled
 
 // CONFIG3L
@@ -111,7 +111,6 @@ void SYSTEM_Initialize(void)
     PIN_MANAGER_Initialize();
     OSCILLATOR_Initialize();
     TMR1_Initialize();
-    EUSART1_Initialize();
 }
 
 void OSCILLATOR_Initialize(void)

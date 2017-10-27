@@ -4,7 +4,6 @@
 Headers/system.h  \
 mcc_generated_files/mcc.h  \
 Headers/stdtypedef.h  \
-mcc_generated_files/eusart1.h  \
 mcc_generated_files/memory.h  \
 app/app_init.h  \
 mcc_generated_files/interrupt_manager.h  \

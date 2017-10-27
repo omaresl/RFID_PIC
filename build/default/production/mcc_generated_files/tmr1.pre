@@ -14359,11 +14359,151 @@ typedef void( *FCT_POINTER )(void);
 
 extern unsigned char sch_alarm;
 
-# 57 "mcc_generated_files/tmr1.c"
+# 39 "mcc_generated_files/../Headers/stdtypedef.h"
+typedef unsigned char T_UBYTE;
+typedef unsigned short T_UWORD;
+typedef unsigned long T_ULONG;
+typedef signed char T_SBYTE;
+typedef signed short T_SWORD;
+typedef signed long T_SLONG;
+typedef unsigned int T_FLAG_ARRAY;
+
+
+typedef void(*T_PPROC)(void);
+
+
+typedef T_UBYTE * PTR_UBYTE;
+typedef T_UWORD * PTR_UWORD;
+typedef T_ULONG * PTR_ULONG;
+typedef T_SBYTE * PTR_SBYTE;
+typedef T_SWORD * PTR_SWORD;
+typedef T_SLONG * PTR_SLONG;
+
+typedef T_UBYTE T_BOOLEAN;
+
+# 73
+typedef struct {
+unsigned int bit0:1;
+unsigned int bit1:1;
+unsigned int bit2:1;
+unsigned int bit3:1;
+unsigned int bit4:1;
+unsigned int bit5:1;
+unsigned int bit6:1;
+unsigned int bit7:1;
+}T_BITFLD8;
+
+typedef struct {
+unsigned int bit15:1;
+unsigned int bit14:1;
+unsigned int bit13:1;
+unsigned int bit12:1;
+unsigned int bit11:1;
+unsigned int bit10:1;
+unsigned int bit9:1;
+unsigned int bit8:1;
+unsigned int bit7:1;
+unsigned int bit6:1;
+unsigned int bit5:1;
+unsigned int bit4:1;
+unsigned int bit3:1;
+unsigned int bit2:1;
+unsigned int bit1:1;
+unsigned int bit0:1;
+}T_BITFLD16;
+
+
+typedef struct {
+unsigned int bit31:1;
+unsigned int bit30:1;
+unsigned int bit29:1;
+unsigned int bit28:1;
+unsigned int bit27:1;
+unsigned int bit26:1;
+unsigned int bit25:1;
+unsigned int bit24:1;
+unsigned int bit23:1;
+unsigned int bit22:1;
+unsigned int bit21:1;
+unsigned int bit20:1;
+unsigned int bit19:1;
+unsigned int bit18:1;
+unsigned int bit17:1;
+unsigned int bit16:1;
+unsigned int bit15:1;
+unsigned int bit14:1;
+unsigned int bit13:1;
+unsigned int bit12:1;
+unsigned int bit11:1;
+unsigned int bit10:1;
+unsigned int bit9:1;
+unsigned int bit8:1;
+unsigned int bit7:1;
+unsigned int bit6:1;
+unsigned int bit5:1;
+unsigned int bit4:1;
+unsigned int bit3:1;
+unsigned int bit2:1;
+unsigned int bit1:1;
+unsigned int bit0:1;
+}T_BITFLD32;
+
+
+typedef union{
+T_UWORD wo;
+struct{
+T_UBYTE msb;
+T_UBYTE lsb;
+}by;
+}T_BYTEFLD;
+
+
+typedef union{
+T_ULONG lo;
+struct {
+T_UBYTE highword_msb;
+T_UBYTE highword_lsb;
+T_UBYTE lowword_msb;
+T_UBYTE lowword_lsb;
+} by;
+
+struct {
+T_UWORD highword;
+T_UWORD lowword;
+} wo;
+
+}T_BYTEFLD32;
+
+
+typedef union {
+T_UBYTE by;
+T_BITFLD8 bi;
+}T_FLAG8;
+
+
+typedef union {
+T_BYTEFLD cr;
+T_BITFLD16 bi;
+}T_FLAG16;
+
+
+typedef union {
+T_BYTEFLD32 cr;
+T_BITFLD32 bi;
+}T_FLAG32;
+
+
+typedef enum
+{
+BFALSE = 0u,
+BTRUE
+}E_BOOLEAN;
+
+# 58 "mcc_generated_files/tmr1.c"
 volatile uint16_t timer1ReloadVal;
 void (*TMR1_InterruptHandler)(void);
 
-# 64
+# 65
 void TMR1_Initialize(void)
 {
 
@@ -14381,10 +14521,10 @@ T1GATE = 0x00;
 T1CLK = 0x01;
 
 
-TMR1H = 0xFC;
+TMR1H = 0xE0;
 
 
-TMR1L = 0xE0;
+TMR1L = 0xC0;
 
 
 timer1ReloadVal=(TMR1H << 8) | TMR1L;
@@ -14492,6 +14632,7 @@ TMR1_InterruptHandler = InterruptHandler;
 void TMR1_DefaultInterruptHandler(void){
 
 
-sch_alarm = 0x01;
+TMR1IF = ((T_BOOLEAN)0u);
+sch_alarm = ((T_BOOLEAN)1u);
 }
 

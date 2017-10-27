@@ -5,6 +5,8 @@
 [d frameptr 4065 ]
 "3 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\app/app_init.c
 [v _InitApp InitApp `(v  1 e 1 0 ]
+"11 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\app/app_LED.c
+[v _app_LED_Task app_LED_Task `(v  1 e 1 0 ]
 "62 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
 "86 C:\Program Files (x86)\Microchip\xc8\v1.38\sources\common\ftadd.c
@@ -27,17 +29,13 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "53 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\main.c
 [v _main main `(v  1 e 1 0 ]
-"75 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/eusart1.c
-[v _EUSART1_Initialize EUSART1_Initialize `(v  1 e 1 0 ]
-"156
-[v _EUSART1_Transmit_ISR EUSART1_Transmit_ISR `(v  1 e 1 0 ]
 "51 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_Initialize INTERRUPT_Initialize `(v  1 e 1 0 ]
-"67
+"64
 [v _INTERRUPT_InterruptManagerHigh INTERRUPT_InterruptManagerHigh `II(v  1 e 1 0 ]
 "107 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
-"117
+"116
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
 "58 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/memory.c
 [v _FLASH_ReadByte FLASH_ReadByte `(uc  1 e 1 0 ]
@@ -47,106 +45,49 @@
 [v _FLASH_EraseBlock FLASH_EraseBlock `(v  1 e 1 0 ]
 "51 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
-"64 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/tmr1.c
+"65 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/tmr1.c
 [v _TMR1_Initialize TMR1_Initialize `(v  1 e 1 0 ]
-"102
+"103
 [v _TMR1_StartTimer TMR1_StartTimer `(v  1 e 1 0 ]
-"162
+"163
 [v _TMR1_ISR TMR1_ISR `(v  1 e 1 0 ]
-"176
+"177
 [v _TMR1_CallBack TMR1_CallBack `(v  1 e 1 0 ]
-"185
+"186
 [v _TMR1_SetInterruptHandler TMR1_SetInterruptHandler `(v  1 e 1 0 ]
-"189
+"190
 [v _TMR1_DefaultInterruptHandler TMR1_DefaultInterruptHandler `(v  1 e 1 0 ]
 "12 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\OS_SEBELL/OS_SEBELL_sched_util.c
 [v _sched_util_task_finder sched_util_task_finder `(uc  1 e 1 0 ]
 "45 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\OS_SEBELL/OS_SEBELL_schedu.c
 [v _scheduler_loop scheduler_loop `(v  1 e 1 0 ]
-"4 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\periodic_task_exec.c
+"5 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\periodic_task_exec.c
 [v _periodic_task_tk periodic_task_tk `(v  1 e 1 0 ]
-"9
+"10
 [v _periodic_task_2tk periodic_task_2tk `(v  1 e 1 0 ]
-"14
+"15
 [v _periodic_task_4tk periodic_task_4tk `(v  1 e 1 0 ]
-"19
+"20
 [v _periodic_task_8tk periodic_task_8tk `(v  1 e 1 0 ]
-"24
+"25
 [v _periodic_task_32tk periodic_task_32tk `(v  1 e 1 0 ]
-"29
+"31
 [v _periodic_task_1024tk periodic_task_1024tk `(v  1 e 1 0 ]
-"34
+"37
 [v _TASK_DUMMY TASK_DUMMY `(v  1 e 1 0 ]
-"1989 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic18f46k40.h
-[v _PPSLOCK PPSLOCK `VEuc  1 e 1 @3744 ]
-[s S76 . 1 `uc 1 PPSLOCKED 1 0 :1:0 
-]
-"1999
-[u S78 . 1 `S76 1 . 1 0 ]
-[v _PPSLOCKbits PPSLOCKbits `VES78  1 e 1 @3744 ]
-[s S260 . 1 `uc 1 SSP1IP 1 0 :1:0 
-`uc 1 BCL1IP 1 0 :1:1 
-`uc 1 SSP2IP 1 0 :1:2 
-`uc 1 BCL2IP 1 0 :1:3 
-`uc 1 TX1IP 1 0 :1:4 
-`uc 1 RC1IP 1 0 :1:5 
-`uc 1 TX2IP 1 0 :1:6 
-`uc 1 RC2IP 1 0 :1:7 
-]
-"3416
-[s S269 . 1 `uc 1 . 1 0 :1:0 
-`uc 1 RXBNIP 1 0 :1:1 
-]
-[s S272 . 1 `uc 1 . 1 0 :4:0 
-`uc 1 TXBNIP 1 0 :1:4 
-]
-[u S275 . 1 `S260 1 . 1 0 `S269 1 . 1 0 `S272 1 . 1 0 ]
-[v _IPR3bits IPR3bits `VES275  1 e 1 @3773 ]
-[s S295 . 1 `uc 1 TMR1IP 1 0 :1:0 
+[s S328 . 1 `uc 1 TMR1IP 1 0 :1:0 
 `uc 1 TMR2IP 1 0 :1:1 
 `uc 1 TMR3IP 1 0 :1:2 
 `uc 1 TMR4IP 1 0 :1:3 
 `uc 1 TMR5IP 1 0 :1:4 
 `uc 1 TMR6IP 1 0 :1:5 
 ]
-"3488
-[s S302 . 1 `uc 1 CCIP3IP 1 0 :1:0 
+"3488 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic18f46k40.h
+[s S335 . 1 `uc 1 CCIP3IP 1 0 :1:0 
 ]
-[u S304 . 1 `S295 1 . 1 0 `S302 1 . 1 0 ]
-[v _IPR4bits IPR4bits `VES304  1 e 1 @3774 ]
-[s S317 . 1 `uc 1 SSP1IE 1 0 :1:0 
-`uc 1 BCL1IE 1 0 :1:1 
-`uc 1 SSP2IE 1 0 :1:2 
-`uc 1 BCL2IE 1 0 :1:3 
-`uc 1 TX1IE 1 0 :1:4 
-`uc 1 RC1IE 1 0 :1:5 
-`uc 1 TX2IE 1 0 :1:6 
-`uc 1 RC2IE 1 0 :1:7 
-]
-"3828
-[s S326 . 1 `uc 1 RXB0IE 1 0 :1:0 
-]
-[s S328 . 1 `uc 1 . 1 0 :1:0 
-`uc 1 RXB1IE 1 0 :1:1 
-]
-[s S331 . 1 `uc 1 . 1 0 :1:0 
-`uc 1 RXBNIE 1 0 :1:1 
-]
-[s S334 . 1 `uc 1 . 1 0 :2:0 
-`uc 1 TXB0IE 1 0 :1:2 
-]
-[s S337 . 1 `uc 1 . 1 0 :3:0 
-`uc 1 TXB1IE 1 0 :1:3 
-]
-[s S340 . 1 `uc 1 . 1 0 :4:0 
-`uc 1 TXB2IE 1 0 :1:4 
-]
-[s S343 . 1 `uc 1 . 1 0 :4:0 
-`uc 1 TXBNIE 1 0 :1:4 
-]
-[u S346 . 1 `S317 1 . 1 0 `S326 1 . 1 0 `S328 1 . 1 0 `S331 1 . 1 0 `S334 1 . 1 0 `S337 1 . 1 0 `S340 1 . 1 0 `S343 1 . 1 0 ]
-[v _PIE3bits PIE3bits `VES346  1 e 1 @3781 ]
-[s S424 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[u S337 . 1 `S328 1 . 1 0 `S335 1 . 1 0 ]
+[v _IPR4bits IPR4bits `VES337  1 e 1 @3774 ]
+[s S350 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 TMR3IE 1 0 :1:2 
 `uc 1 TMR4IE 1 0 :1:3 
@@ -154,27 +95,9 @@
 `uc 1 TMR6IE 1 0 :1:5 
 ]
 "3922
-[u S431 . 1 `S424 1 . 1 0 ]
-[v _PIE4bits PIE4bits `VES431  1 e 1 @3782 ]
-[s S385 . 1 `uc 1 SSP1IF 1 0 :1:0 
-`uc 1 BCL1IF 1 0 :1:1 
-`uc 1 SSP2IF 1 0 :1:2 
-`uc 1 BCL2IF 1 0 :1:3 
-`uc 1 TX1IF 1 0 :1:4 
-`uc 1 RC1IF 1 0 :1:5 
-`uc 1 TX2IF 1 0 :1:6 
-`uc 1 RC2IF 1 0 :1:7 
-]
-"4221
-[s S394 . 1 `uc 1 . 1 0 :1:0 
-`uc 1 RXBNIF 1 0 :1:1 
-]
-[s S397 . 1 `uc 1 . 1 0 :4:0 
-`uc 1 TXBNIF 1 0 :1:4 
-]
-[u S400 . 1 `S385 1 . 1 0 `S394 1 . 1 0 `S397 1 . 1 0 ]
-[v _PIR3bits PIR3bits `VES400  1 e 1 @3789 ]
-[s S441 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S357 . 1 `S350 1 . 1 0 ]
+[v _PIE4bits PIE4bits `VES357  1 e 1 @3782 ]
+[s S367 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 TMR3IF 1 0 :1:2 
 `uc 1 TMR4IF 1 0 :1:3 
@@ -182,19 +105,19 @@
 `uc 1 TMR6IF 1 0 :1:5 
 ]
 "4290
-[u S448 . 1 `S441 1 . 1 0 ]
-[v _PIR4bits PIR4bits `VES448  1 e 1 @3790 ]
-[s S176 . 1 `uc 1 CWGIF 1 0 :1:0 
+[u S374 . 1 `S367 1 . 1 0 ]
+[v _PIR4bits PIR4bits `VES374  1 e 1 @3790 ]
+[s S244 . 1 `uc 1 CWGIF 1 0 :1:0 
 `uc 1 . 1 0 :4:1 
 `uc 1 NVMIF 1 0 :1:5 
 `uc 1 CRCIF 1 0 :1:6 
 `uc 1 SCANIF 1 0 :1:7 
 ]
 "4397
-[s S182 . 1 `uc 1 CWG1IF 1 0 :1:0 
+[s S250 . 1 `uc 1 CWG1IF 1 0 :1:0 
 ]
-[u S184 . 1 `S176 1 . 1 0 `S182 1 . 1 0 ]
-[v _PIR7bits PIR7bits `VES184  1 e 1 @3793 ]
+[u S252 . 1 `S244 1 . 1 0 `S250 1 . 1 0 ]
+[v _PIR7bits PIR7bits `VES252  1 e 1 @3793 ]
 "4998
 [v _OSCCON1 OSCCON1 `VEuc  1 e 1 @3800 ]
 "5136
@@ -205,8 +128,6 @@
 [v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3805 ]
 "5393
 [v _OSCFRQ OSCFRQ `VEuc  1 e 1 @3806 ]
-"6135
-[v _RB0PPS RB0PPS `VEuc  1 e 1 @3823 ]
 "7601
 [v _ODCONA ODCONA `VEuc  1 e 1 @3855 ]
 "7662
@@ -243,7 +164,7 @@
 [v _NVMADRH NVMADRH `VEuc  1 e 1 @3967 ]
 "15479
 [v _NVMDAT NVMDAT `VEuc  1 e 1 @3968 ]
-[s S88 . 1 `uc 1 RD 1 0 :1:0 
+[s S156 . 1 `uc 1 RD 1 0 :1:0 
 `uc 1 WR 1 0 :1:1 
 `uc 1 WREN 1 0 :1:2 
 `uc 1 WRERR 1 0 :1:3 
@@ -252,18 +173,53 @@
 `uc 1 NVMREG 1 0 :2:6 
 ]
 "15569
-[s S96 . 1 `uc 1 . 1 0 :6:0 
+[s S164 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 NVMREG0 1 0 :1:6 
 `uc 1 NVMREG1 1 0 :1:7 
 ]
-[u S100 . 1 `S88 1 . 1 0 `S96 1 . 1 0 ]
-[v _NVMCON1bits NVMCON1bits `VES100  1 e 1 @3969 ]
+[u S168 . 1 `S156 1 . 1 0 `S164 1 . 1 0 ]
+[v _NVMCON1bits NVMCON1bits `VES168  1 e 1 @3969 ]
 "15613
 [v _NVMCON2 NVMCON2 `VEuc  1 e 1 @3970 ]
 "15632
 [v _LATA LATA `VEuc  1 e 1 @3971 ]
 "15764
 [v _LATB LATB `VEuc  1 e 1 @3972 ]
+[s S22 . 1 `uc 1 LATB0 1 0 :1:0 
+`uc 1 LATB1 1 0 :1:1 
+`uc 1 LATB2 1 0 :1:2 
+`uc 1 LATB3 1 0 :1:3 
+`uc 1 LATB4 1 0 :1:4 
+`uc 1 LATB5 1 0 :1:5 
+`uc 1 LATB6 1 0 :1:6 
+`uc 1 LATB7 1 0 :1:7 
+]
+"15812
+[s S31 . 1 `uc 1 LB0 1 0 :1:0 
+]
+[s S33 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 LB1 1 0 :1:1 
+]
+[s S36 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 LB2 1 0 :1:2 
+]
+[s S39 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 LB3 1 0 :1:3 
+]
+[s S42 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 LB4 1 0 :1:4 
+]
+[s S45 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 LB5 1 0 :1:5 
+]
+[s S48 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 LB6 1 0 :1:6 
+]
+[s S51 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 LB7 1 0 :1:7 
+]
+[u S54 . 1 `S22 1 . 1 0 `S31 1 . 1 0 `S33 1 . 1 0 `S36 1 . 1 0 `S39 1 . 1 0 `S42 1 . 1 0 `S45 1 . 1 0 `S48 1 . 1 0 `S51 1 . 1 0 ]
+[v _LATBbits LATBbits `VES54  1 e 1 @3972 ]
 "15896
 [v _LATC LATC `VEuc  1 e 1 @3973 ]
 "16028
@@ -280,79 +236,45 @@
 [v _TRISD TRISD `VEuc  1 e 1 @3979 ]
 "17146
 [v _TRISE TRISE `VEuc  1 e 1 @3980 ]
-"18768
-[v _RC1REG RC1REG `VEuc  1 e 1 @3993 ]
-"18805
-[v _TX1REG TX1REG `VEuc  1 e 1 @3994 ]
-"18848
-[v _SP1BRGL SP1BRGL `VEuc  1 e 1 @3995 ]
-"18885
-[v _SP1BRGH SP1BRGH `VEuc  1 e 1 @3996 ]
-"18922
-[v _RC1STA RC1STA `VEuc  1 e 1 @3997 ]
-[s S558 . 1 `uc 1 RX9D 1 0 :1:0 
-`uc 1 OERR 1 0 :1:1 
-`uc 1 FERR 1 0 :1:2 
-`uc 1 ADDEN 1 0 :1:3 
-`uc 1 CREN 1 0 :1:4 
-`uc 1 SREN 1 0 :1:5 
-`uc 1 RX9 1 0 :1:6 
-`uc 1 SPEN 1 0 :1:7 
-]
-"18955
-[s S567 . 1 `uc 1 . 1 0 :6:0 
-`uc 1 RC8_9 1 0 :1:6 
-]
-[s S570 . 1 `uc 1 . 1 0 :6:0 
-`uc 1 RC9 1 0 :1:6 
-]
-[s S573 . 1 `uc 1 RCD8 1 0 :1:0 
-]
-[u S575 . 1 `S558 1 . 1 0 `S567 1 . 1 0 `S570 1 . 1 0 `S573 1 . 1 0 ]
-[v _RC1STAbits RC1STAbits `VES575  1 e 1 @3997 ]
-"19095
-[v _TX1STA TX1STA `VEuc  1 e 1 @3998 ]
-"19250
-[v _BAUD1CON BAUD1CON `VEuc  1 e 1 @3999 ]
 "24073
 [v _TMR1L TMR1L `VEuc  1 e 1 @4045 ]
 "24142
 [v _TMR1H TMR1H `VEuc  1 e 1 @4046 ]
 "24211
 [v _T1CON T1CON `VEuc  1 e 1 @4047 ]
-[s S663 . 1 `uc 1 . 1 0 :2:0 
+[s S456 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_SYNC 1 0 :1:2 
 ]
 "24246
-[s S666 . 1 `uc 1 ON 1 0 :1:0 
+[s S459 . 1 `uc 1 ON 1 0 :1:0 
 `uc 1 RD16 1 0 :1:1 
 `uc 1 nSYNC 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
 `uc 1 CKPS 1 0 :2:4 
 ]
-[s S672 . 1 `uc 1 . 1 0 :2:0 
+[s S465 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_T1SYNC 1 0 :1:2 
 ]
-[s S675 . 1 `uc 1 TMR1ON 1 0 :1:0 
+[s S468 . 1 `uc 1 TMR1ON 1 0 :1:0 
 `uc 1 T1RD16 1 0 :1:1 
 `uc 1 nT1SYNC 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
 `uc 1 T1CKPS0 1 0 :1:4 
 `uc 1 T1CKPS1 1 0 :1:5 
 ]
-[s S682 . 1 `uc 1 . 1 0 :4:0 
+[s S475 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 CKPS0 1 0 :1:4 
 `uc 1 CKPS1 1 0 :1:5 
 ]
-[u S686 . 1 `S663 1 . 1 0 `S666 1 . 1 0 `S672 1 . 1 0 `S675 1 . 1 0 `S682 1 . 1 0 ]
-[v _T1CONbits T1CONbits `VES686  1 e 1 @4047 ]
+[u S479 . 1 `S456 1 . 1 0 `S459 1 . 1 0 `S465 1 . 1 0 `S468 1 . 1 0 `S475 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES479  1 e 1 @4047 ]
 "24315
 [v _T1GCON T1GCON `VEuc  1 e 1 @4048 ]
-[s S716 . 1 `uc 1 . 1 0 :3:0 
+[s S509 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 GGO_NOT_DONE 1 0 :1:3 
 ]
 "24357
-[s S719 . 1 `uc 1 . 1 0 :2:0 
+[s S512 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 GVAL 1 0 :1:2 
 `uc 1 GGO_nDONE 1 0 :1:3 
 `uc 1 GSPM 1 0 :1:4 
@@ -360,10 +282,10 @@
 `uc 1 GPOL 1 0 :1:6 
 `uc 1 GE 1 0 :1:7 
 ]
-[s S727 . 1 `uc 1 . 1 0 :3:0 
+[s S520 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 T1GGO_NOT_DONE 1 0 :1:3 
 ]
-[s S730 . 1 `uc 1 . 1 0 :2:0 
+[s S523 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T1GVAL 1 0 :1:2 
 `uc 1 T1GGO_nDONE 1 0 :1:3 
 `uc 1 T1GSPM 1 0 :1:4 
@@ -371,16 +293,16 @@
 `uc 1 T1GPOL 1 0 :1:6 
 `uc 1 T1GE 1 0 :1:7 
 ]
-[s S738 . 1 `uc 1 . 1 0 :3:0 
+[s S531 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 T1GGO 1 0 :1:3 
 ]
-[u S741 . 1 `S716 1 . 1 0 `S719 1 . 1 0 `S727 1 . 1 0 `S730 1 . 1 0 `S738 1 . 1 0 ]
-[v _T1GCONbits T1GCONbits `VES741  1 e 1 @4048 ]
+[u S534 . 1 `S509 1 . 1 0 `S512 1 . 1 0 `S520 1 . 1 0 `S523 1 . 1 0 `S531 1 . 1 0 ]
+[v _T1GCONbits T1GCONbits `VES534  1 e 1 @4048 ]
 "24546
 [v _T1GATE T1GATE `VEuc  1 e 1 @4049 ]
 "24687
 [v _T1CLK T1CLK `VEuc  1 e 1 @4050 ]
-[s S126 . 1 `uc 1 INT0EDG 1 0 :1:0 
+[s S194 . 1 `uc 1 INT0EDG 1 0 :1:0 
 `uc 1 INT1EDG 1 0 :1:1 
 `uc 1 INT2EDG 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
@@ -389,16 +311,16 @@
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "26114
-[s S134 . 1 `uc 1 . 1 0 :6:0 
+[s S202 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S138 . 1 `uc 1 . 1 0 :6:0 
+[s S206 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S142 . 1 `S126 1 . 1 0 `S134 1 . 1 0 `S138 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES142  1 e 1 @4082 ]
+[u S210 . 1 `S194 1 . 1 0 `S202 1 . 1 0 `S206 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES210  1 e 1 @4082 ]
 "26212
 [v _TABLAT TABLAT `VEuc  1 e 1 @4085 ]
 "26239
@@ -407,27 +329,11 @@
 [v _TBLPTRH TBLPTRH `VEuc  1 e 1 @4087 ]
 "26277
 [v _TBLPTRU TBLPTRU `VEuc  1 e 1 @4088 ]
-"27748
-[v _GIE GIE `VEb  1 e 0 @32663 ]
-"61 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/eusart1.c
-[v _eusart1TxHead eusart1TxHead `uc  1 s 1 eusart1TxHead ]
-"62
-[v _eusart1TxTail eusart1TxTail `uc  1 s 1 eusart1TxTail ]
-"63
-[v _eusart1TxBuffer eusart1TxBuffer `[8]uc  1 s 8 eusart1TxBuffer ]
-"64
-[v _eusart1TxBufferRemaining eusart1TxBufferRemaining `VEuc  1 e 1 0 ]
-"66
-[v _eusart1RxHead eusart1RxHead `uc  1 s 1 eusart1RxHead ]
-"67
-[v _eusart1RxTail eusart1RxTail `uc  1 s 1 eusart1RxTail ]
-"68
-[v _eusart1RxBuffer eusart1RxBuffer `[8]uc  1 s 8 eusart1RxBuffer ]
-"69
-[v _eusart1RxCount eusart1RxCount `VEuc  1 e 1 0 ]
-"57 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/tmr1.c
+"30100
+[v _TMR1IF TMR1IF `VEb  1 e 0 @30320 ]
+"58 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/tmr1.c
 [v _timer1ReloadVal timer1ReloadVal `VEui  1 e 2 0 ]
-"58
+"59
 [v _TMR1_InterruptHandler TMR1_InterruptHandler `*.37(v  1 e 2 0 ]
 "14 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\OS_SEBELL/OS_SEBELL_schedu.c
 [v _sch_alarm sch_alarm `uc  1 e 1 0 ]
@@ -458,111 +364,104 @@
 [v sched_util_task_finder@sch_counter sch_counter `us  1 p 2 14 ]
 "30
 } 0
-"29 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\periodic_task_exec.c
+"31 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\periodic_task_exec.c
 [v _periodic_task_1024tk periodic_task_1024tk `(v  1 e 1 0 ]
 {
-"32
+"35
 } 0
-"24
+"25
 [v _periodic_task_32tk periodic_task_32tk `(v  1 e 1 0 ]
 {
-"27
+"29
 } 0
-"34
+"37
 [v _TASK_DUMMY TASK_DUMMY `(v  1 e 1 0 ]
 {
-"37
+"40
 } 0
-"19
+"20
 [v _periodic_task_8tk periodic_task_8tk `(v  1 e 1 0 ]
 {
-"22
+"23
 } 0
-"14
+"15
 [v _periodic_task_4tk periodic_task_4tk `(v  1 e 1 0 ]
 {
-"17
+"18
 } 0
-"9
+"10
 [v _periodic_task_2tk periodic_task_2tk `(v  1 e 1 0 ]
 {
-"12
+"13
 } 0
-"4
+"5
 [v _periodic_task_tk periodic_task_tk `(v  1 e 1 0 ]
 {
-"7
+"8
+} 0
+"11 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\app/app_LED.c
+[v _app_LED_Task app_LED_Task `(v  1 e 1 0 ]
+{
+"16
 } 0
 "107 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 {
-"115
+"114
 } 0
-"64 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/tmr1.c
+"65 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/tmr1.c
 [v _TMR1_Initialize TMR1_Initialize `(v  1 e 1 0 ]
 {
-"100
+"101
 } 0
-"102
+"103
 [v _TMR1_StartTimer TMR1_StartTimer `(v  1 e 1 0 ]
 {
-"106
+"107
 } 0
-"185
+"186
 [v _TMR1_SetInterruptHandler TMR1_SetInterruptHandler `(v  1 e 1 0 ]
 {
 [v TMR1_SetInterruptHandler@InterruptHandler InterruptHandler `*.2v  1 p 2 14 ]
-"187
+"188
 } 0
 "51 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
 {
-"103
-[v PIN_MANAGER_Initialize@state state `uc  1 a 1 14 ]
-"116
+"102
 } 0
-"117 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/mcc.c
+"116 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/mcc.c
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
 {
-"131
+"130
 } 0
 "51 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_Initialize INTERRUPT_Initialize `(v  1 e 1 0 ]
 {
-"65
-} 0
-"75 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/eusart1.c
-[v _EUSART1_Initialize EUSART1_Initialize `(v  1 e 1 0 ]
-{
-"110
+"62
 } 0
 "3 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\app/app_init.c
 [v _InitApp InitApp `(v  1 e 1 0 ]
 {
 "6
 } 0
-"67 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/interrupt_manager.c
+"64 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManagerHigh INTERRUPT_InterruptManagerHigh `II(v  1 e 1 0 ]
 {
-"78
+"71
 } 0
-"162 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/tmr1.c
+"163 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/tmr1.c
 [v _TMR1_ISR TMR1_ISR `(v  1 e 1 0 ]
 {
-"174
+"175
 } 0
-"176
+"177
 [v _TMR1_CallBack TMR1_CallBack `(v  1 e 1 0 ]
 {
-"183
+"184
 } 0
-"189
+"190
 [v _TMR1_DefaultInterruptHandler TMR1_DefaultInterruptHandler `(v  1 e 1 0 ]
 {
-"193
-} 0
-"156 C:\Users\uidj2522\Desktop\RFID_PIC\RFID_PIC\mcc_generated_files/eusart1.c
-[v _EUSART1_Transmit_ISR EUSART1_Transmit_ISR `(v  1 e 1 0 ]
-{
-"172
+"195
 } 0

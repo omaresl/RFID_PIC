@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 Macro Assembler V1.38 build -256452561 
-                                                                                                           Thu Oct 26 14:49:57 2017
+                                                                                                           Thu Oct 26 18:59:53 2017
 
 
      1                           	processor	18F46K40
@@ -23,13 +23,13 @@ Microchip Technology PIC18 Macro Assembler V1.38 build -256452561
     17                           ; objects from the stack prior to returning from a function
     18  0000                     
     19                           	psect	powerup
-    20  00009A                     powerup:
+    20  00008C                     powerup:
     21                           	opt stack 0
-    22  00009A  8E81               	bsf	3969,7,c
-    23  00009C  EF50  F000         	goto	start
+    22  00008C  8E81               	bsf	3969,7,c
+    23  00008E  EF49  F000         	goto	start
 
 
 Microchip Technology PIC18 Macro Assembler V1.38 build -256452561 
-Symbol Table                                                                                               Thu Oct 26 14:49:57 2017
+Symbol Table                                                                                               Thu Oct 26 18:59:53 2017
 
-                          start 00A0                          NVMCON1 000F81                          powerup 009A  
+                          start 0092                          NVMCON1 000F81                          powerup 008C  

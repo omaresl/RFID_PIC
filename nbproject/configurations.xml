@@ -10,11 +10,9 @@
         <itemPath>mcc_generated_files/mcc.h</itemPath>
         <itemPath>mcc_generated_files/pin_manager.h</itemPath>
         <itemPath>mcc_generated_files/interrupt_manager.h</itemPath>
-        <itemPath>mcc_generated_files/eusart1.h</itemPath>
         <itemPath>mcc_generated_files/memory.h</itemPath>
         <itemPath>mcc_generated_files/tmr1.h</itemPath>
       </logicalFolder>
-      <itemPath>Headers/PIN_Configuration.h</itemPath>
       <itemPath>Headers/stdtypedef.h</itemPath>
       <itemPath>Headers/system.h</itemPath>
     </logicalFolder>
@@ -28,8 +26,8 @@
       <logicalFolder name="app" displayName="app" projectFiles="true">
         <itemPath>app/app_init.c</itemPath>
         <itemPath>app/app_init.h</itemPath>
-        <itemPath>app/app_io.c</itemPath>
-        <itemPath>app/app_io.h</itemPath>
+        <itemPath>app/app_LED.c</itemPath>
+        <itemPath>app/app_LED.h</itemPath>
       </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
@@ -38,7 +36,6 @@
         <itemPath>mcc_generated_files/pin_manager.c</itemPath>
         <itemPath>mcc_generated_files/memory.c</itemPath>
         <itemPath>mcc_generated_files/interrupt_manager.c</itemPath>
-        <itemPath>mcc_generated_files/eusart1.c</itemPath>
         <itemPath>mcc_generated_files/tmr1.c</itemPath>
       </logicalFolder>
       <logicalFolder name="OS_SEBELL" displayName="OS_SEBELL" projectFiles="true">
@@ -174,6 +171,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

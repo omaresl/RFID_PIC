@@ -13,20 +13,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S1445 . . . . ]
 "26114
 [v _INTCONbits `VS1445 ~T0 @X0 0 e@4082 ]
-"3397
-[s S243 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S243 . SSP1IP BCL1IP SSP2IP BCL2IP TX1IP RC1IP TX2IP RC2IP ]
-"3407
-[s S244 :1 `uc 1 :1 `uc 1 ]
-[n S244 . . RXBNIP ]
-"3411
-[s S245 :4 `uc 1 :1 `uc 1 ]
-[n S245 . . TXBNIP ]
-"3396
-[u S242 `S243 1 `S244 1 `S245 1 ]
-[n S242 . . . . ]
-"3416
-[v _IPR3bits `VS242 ~T0 @X0 0 e@3773 ]
 "3476
 [s S247 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S247 . TMR1IP TMR2IP TMR3IP TMR4IP TMR5IP TMR6IP ]
@@ -38,52 +24,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S246 . . . ]
 "3488
 [v _IPR4bits `VS246 ~T0 @X0 0 e@3774 ]
-"3790
-[s S267 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S267 . SSP1IE BCL1IE SSP2IE BCL2IE TX1IE RC1IE TX2IE RC2IE ]
-"3800
-[s S268 :1 `uc 1 ]
-[n S268 . RXB0IE ]
-"3803
-[s S269 :1 `uc 1 :1 `uc 1 ]
-[n S269 . . RXB1IE ]
-"3807
-[s S270 :1 `uc 1 :1 `uc 1 ]
-[n S270 . . RXBNIE ]
-"3811
-[s S271 :2 `uc 1 :1 `uc 1 ]
-[n S271 . . TXB0IE ]
-"3815
-[s S272 :3 `uc 1 :1 `uc 1 ]
-[n S272 . . TXB1IE ]
-"3819
-[s S273 :4 `uc 1 :1 `uc 1 ]
-[n S273 . . TXB2IE ]
-"3823
-[s S274 :4 `uc 1 :1 `uc 1 ]
-[n S274 . . TXBNIE ]
-"3789
-[u S266 `S267 1 `S268 1 `S269 1 `S270 1 `S271 1 `S272 1 `S273 1 `S274 1 ]
-[n S266 . . . . . . . . . ]
-"3828
-[v _PIE3bits `VS266 ~T0 @X0 0 e@3781 ]
-"4202
-[s S293 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S293 . SSP1IF BCL1IF SSP2IF BCL2IF TX1IF RC1IF TX2IF RC2IF ]
-"4212
-[s S294 :1 `uc 1 :1 `uc 1 ]
-[n S294 . . RXBNIF ]
-"4216
-[s S295 :4 `uc 1 :1 `uc 1 ]
-[n S295 . . TXBNIF ]
-"4201
-[u S292 `S293 1 `S294 1 `S295 1 ]
-[n S292 . . . . ]
-"4221
-[v _PIR3bits `VS292 ~T0 @X0 0 e@3789 ]
-"200 mcc_generated_files/eusart1.h
-[v _EUSART1_Transmit_ISR `(v ~T0 @X0 0 ef ]
-"3913 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic18f46k40.h
+"3913
 [s S276 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S276 . TMR1IE TMR2IE TMR3IE TMR4IE TMR5IE TMR6IE ]
 "3912
@@ -10949,8 +10890,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 157: extern __nonreentrant void _delay(unsigned long);
 [; ;pic18.h: 159: extern __nonreentrant void _delaywdt(unsigned long);
 [; ;pic18.h: 161: extern __nonreentrant void _delay3(unsigned char);
-[; ;pin_manager.h: 224: void PIN_MANAGER_Initialize (void);
-[; ;pin_manager.h: 236: void PIN_MANAGER_IOC(void);
+[; ;pin_manager.h: 132: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 144: void PIN_MANAGER_IOC(void);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -10993,13 +10934,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;tmr1.h: 403: void TMR1_SetInterruptHandler(void *InterruptHandler);
 [; ;tmr1.h: 421: extern void (*TMR1_InterruptHandler)(void);
 [; ;tmr1.h: 439: void TMR1_DefaultInterruptHandler(void);
-[; ;eusart1.h: 76: extern volatile uint8_t eusart1TxBufferRemaining;
-[; ;eusart1.h: 77: extern volatile uint8_t eusart1RxCount;
-[; ;eusart1.h: 105: void EUSART1_Initialize(void);
-[; ;eusart1.h: 154: uint8_t EUSART1_Read(void);
-[; ;eusart1.h: 179: void EUSART1_Write(uint8_t txData);
-[; ;eusart1.h: 200: void EUSART1_Transmit_ISR(void);
-[; ;eusart1.h: 221: void EUSART1_Receive_ISR(void);
 [; ;memory.h: 98: uint8_t FLASH_ReadByte(uint32_t flashAddr);
 [; ;memory.h: 124: uint16_t FLASH_ReadWord(uint32_t flashAddr);
 [; ;memory.h: 156: void FLASH_WriteByte(uint32_t flashAddr, uint8_t *flashRdBufPtr, uint8_t byte);
@@ -11007,8 +10941,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;memory.h: 217: void FLASH_EraseBlock(uint32_t baseAddr);
 [; ;memory.h: 248: void DATAEE_WriteByte(uint16_t bAdd, uint8_t bData);
 [; ;memory.h: 274: uint8_t DATAEE_ReadByte(uint16_t bAdd);
-[; ;mcc.h: 71: void SYSTEM_Initialize(void);
-[; ;mcc.h: 84: void OSCILLATOR_Initialize(void);
+[; ;mcc.h: 70: void SYSTEM_Initialize(void);
+[; ;mcc.h: 83: void OSCILLATOR_Initialize(void);
 "51 mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_Initialize `(v ~T0 @X0 1 ef ]
 "52
@@ -11020,52 +10954,36 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupt_manager.c: 54: INTCONbits.IPEN = 1;
 "54
 [e = . . _INTCONbits 0 4 -> -> 1 `i `uc ]
-[; ;interrupt_manager.c: 59: IPR3bits.TX1IP = 1;
+[; ;interrupt_manager.c: 59: IPR4bits.TMR1IP = 1;
 "59
-[e = . . _IPR3bits 0 4 -> -> 1 `i `uc ]
-[; ;interrupt_manager.c: 62: IPR4bits.TMR1IP = 1;
-"62
 [e = . . _IPR4bits 0 0 -> -> 1 `i `uc ]
-[; ;interrupt_manager.c: 65: }
-"65
+[; ;interrupt_manager.c: 62: }
+"62
 [e :UE 1476 ]
 }
-[v F11702 `(v ~T0 @X0 1 tf ]
-"67
-[v _INTERRUPT_InterruptManagerHigh `IF11702 ~T0 @X0 1 e ]
-"68
+[v F11690 `(v ~T0 @X0 1 tf ]
+"64
+[v _INTERRUPT_InterruptManagerHigh `IF11690 ~T0 @X0 1 e ]
+"65
 {
-[; ;interrupt_manager.c: 67: void interrupt INTERRUPT_InterruptManagerHigh (void)
-[; ;interrupt_manager.c: 68: {
+[; ;interrupt_manager.c: 64: void interrupt INTERRUPT_InterruptManagerHigh (void)
+[; ;interrupt_manager.c: 65: {
 [e :U _INTERRUPT_InterruptManagerHigh ]
 [f ]
-[; ;interrupt_manager.c: 70: if(PIE3bits.TX1IE == 1 && PIR3bits.TX1IF == 1)
-"70
-[e $ ! && == -> . . _PIE3bits 0 4 `i -> 1 `i == -> . . _PIR3bits 0 4 `i -> 1 `i 1478  ]
-[; ;interrupt_manager.c: 71: {
-"71
+[; ;interrupt_manager.c: 67: if(PIE4bits.TMR1IE == 1 && PIR4bits.TMR1IF == 1)
+"67
+[e $ ! && == -> . . _PIE4bits 0 0 `i -> 1 `i == -> . . _PIR4bits 0 0 `i -> 1 `i 1478  ]
+[; ;interrupt_manager.c: 68: {
+"68
 {
-[; ;interrupt_manager.c: 72: EUSART1_Transmit_ISR();
-"72
-[e ( _EUSART1_Transmit_ISR ..  ]
-"73
+[; ;interrupt_manager.c: 69: TMR1_ISR();
+"69
+[e ( _TMR1_ISR ..  ]
+"70
 }
 [e :U 1478 ]
-[; ;interrupt_manager.c: 73: }
-[; ;interrupt_manager.c: 74: if(PIE4bits.TMR1IE == 1 && PIR4bits.TMR1IF == 1)
-"74
-[e $ ! && == -> . . _PIE4bits 0 0 `i -> 1 `i == -> . . _PIR4bits 0 0 `i -> 1 `i 1479  ]
-[; ;interrupt_manager.c: 75: {
-"75
-{
-[; ;interrupt_manager.c: 76: TMR1_ISR();
-"76
-[e ( _TMR1_ISR ..  ]
-"77
-}
-[e :U 1479 ]
-[; ;interrupt_manager.c: 77: }
-[; ;interrupt_manager.c: 78: }
-"78
+[; ;interrupt_manager.c: 70: }
+[; ;interrupt_manager.c: 71: }
+"71
 [e :UE 1477 ]
 }

@@ -56,7 +56,7 @@ void PIN_MANAGER_Initialize(void)
     LATE = 0x00;    
     LATD = 0x00;    
     LATA = 0x00;    
-    LATB = 0x02;    
+    LATB = 0x00;    
     LATC = 0x00;    
 
     /**
@@ -64,15 +64,15 @@ void PIN_MANAGER_Initialize(void)
     */    
     TRISE = 0x07;
     TRISA = 0xFF;
-    TRISB = 0xFE;
+    TRISB = 0x78;
     TRISC = 0xFF;
-    TRISD = 0x01;
+    TRISD = 0xFF;
 
     /**
     ANSELx registers
     */   
     ANSELC = 0x7F;
-    ANSELB = 0x80;
+    ANSELB = 0x00;
     ANSELD = 0x00;
     ANSELE = 0x07;
     ANSELA = 0xFE;
@@ -99,20 +99,6 @@ void PIN_MANAGER_Initialize(void)
 
    
     
-    
-    bool state = GIE;
-    GIE = 0;
-    PPSLOCK = 0x55;
-    PPSLOCK = 0xAA;
-    PPSLOCKbits.PPSLOCKED = 0x00; // unlock PPS
-
-    RB0PPS = 0x09;   //RB0->EUSART1:TX1;
-
-    PPSLOCK = 0x55;
-    PPSLOCK = 0xAA;
-    PPSLOCKbits.PPSLOCKED = 0x01; // lock PPS
-
-    GIE = state;
 }       
 
 void PIN_MANAGER_IOC(void)

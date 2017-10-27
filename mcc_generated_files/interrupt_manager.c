@@ -55,9 +55,6 @@ void  INTERRUPT_Initialize (void)
 
     // Assign peripheral interrupt priority vectors
 
-    // TXI - high priority
-    IPR3bits.TX1IP = 1;
-
     // TMRI - high priority
     IPR4bits.TMR1IP = 1;
 
@@ -67,10 +64,6 @@ void  INTERRUPT_Initialize (void)
 void interrupt INTERRUPT_InterruptManagerHigh (void)
 {
    // interrupt handler
-    if(PIE3bits.TX1IE == 1 && PIR3bits.TX1IF == 1)
-    {
-        EUSART1_Transmit_ISR();
-    }
     if(PIE4bits.TMR1IE == 1 && PIR4bits.TMR1IF == 1)
     {
         TMR1_ISR();

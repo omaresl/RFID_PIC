@@ -1,15 +1,5 @@
 
-# 1 "mcc_generated_files/eusart1.c"
-
-# 26 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\htc.h"
-extern const char __xc8_OPTIM_SPEED;
-
-extern double __fpnormalize(double);
-
-
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\xc8debug.h"
-#pragma intrinsic(__builtin_software_breakpoint)
-extern void __builtin_software_breakpoint(void);
+# 1 "app/app_LED.c"
 
 # 49 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic18f46k40.h"
 extern volatile unsigned char RX2PPS @ 0xE8D;
@@ -14202,252 +14192,159 @@ extern volatile __bit nWDTWV @ (((unsigned) &PCON0)*8) + 5;
 
 extern volatile __bit nWRITE2 @ (((unsigned) &SSP2STAT)*8) + 2;
 
-# 18 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic18.h"
-__attribute__((__unsupported__("The " "flash_write" " routine is no longer supported. Please use the MPLAB X MCC."))) void flash_write(const unsigned char *, unsigned int, __far unsigned char *);
-__attribute__((__unsupported__("The " "EraseFlash" " routine is no longer supported. Please use the MPLAB X MCC."))) void EraseFlash(unsigned long startaddr, unsigned long endaddr);
+# 39 "Headers\stdtypedef.h"
+typedef unsigned char T_UBYTE;
+typedef unsigned short T_UWORD;
+typedef unsigned long T_ULONG;
+typedef signed char T_SBYTE;
+typedef signed short T_SWORD;
+typedef signed long T_SLONG;
+typedef unsigned int T_FLAG_ARRAY;
 
 
-# 42
-#pragma intrinsic(__nop)
-extern void __nop(void);
+typedef void(*T_PPROC)(void);
 
 
-# 156
-#pragma intrinsic(_delay)
-extern __nonreentrant void _delay(unsigned long);
-#pragma intrinsic(_delaywdt)
-extern __nonreentrant void _delaywdt(unsigned long);
-#pragma intrinsic(_delay3)
-extern __nonreentrant void _delay3(unsigned char);
+typedef T_UBYTE * PTR_UBYTE;
+typedef T_UWORD * PTR_UWORD;
+typedef T_ULONG * PTR_ULONG;
+typedef T_SBYTE * PTR_SBYTE;
+typedef T_SWORD * PTR_SWORD;
+typedef T_SLONG * PTR_SLONG;
 
-# 12 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\stdbool.h"
-typedef unsigned char bool;
+typedef T_UBYTE T_BOOLEAN;
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.38\include\stdint.h"
-typedef signed char int8_t;
+# 73
+typedef struct {
+unsigned int bit0:1;
+unsigned int bit1:1;
+unsigned int bit2:1;
+unsigned int bit3:1;
+unsigned int bit4:1;
+unsigned int bit5:1;
+unsigned int bit6:1;
+unsigned int bit7:1;
+}T_BITFLD8;
 
-# 20
-typedef signed int int16_t;
+typedef struct {
+unsigned int bit15:1;
+unsigned int bit14:1;
+unsigned int bit13:1;
+unsigned int bit12:1;
+unsigned int bit11:1;
+unsigned int bit10:1;
+unsigned int bit9:1;
+unsigned int bit8:1;
+unsigned int bit7:1;
+unsigned int bit6:1;
+unsigned int bit5:1;
+unsigned int bit4:1;
+unsigned int bit3:1;
+unsigned int bit2:1;
+unsigned int bit1:1;
+unsigned int bit0:1;
+}T_BITFLD16;
 
-# 28
-typedef signed short long int int24_t;
 
-# 36
-typedef signed long int int32_t;
+typedef struct {
+unsigned int bit31:1;
+unsigned int bit30:1;
+unsigned int bit29:1;
+unsigned int bit28:1;
+unsigned int bit27:1;
+unsigned int bit26:1;
+unsigned int bit25:1;
+unsigned int bit24:1;
+unsigned int bit23:1;
+unsigned int bit22:1;
+unsigned int bit21:1;
+unsigned int bit20:1;
+unsigned int bit19:1;
+unsigned int bit18:1;
+unsigned int bit17:1;
+unsigned int bit16:1;
+unsigned int bit15:1;
+unsigned int bit14:1;
+unsigned int bit13:1;
+unsigned int bit12:1;
+unsigned int bit11:1;
+unsigned int bit10:1;
+unsigned int bit9:1;
+unsigned int bit8:1;
+unsigned int bit7:1;
+unsigned int bit6:1;
+unsigned int bit5:1;
+unsigned int bit4:1;
+unsigned int bit3:1;
+unsigned int bit2:1;
+unsigned int bit1:1;
+unsigned int bit0:1;
+}T_BITFLD32;
 
-# 43
-typedef unsigned char uint8_t;
 
-# 49
-typedef unsigned int uint16_t;
+typedef union{
+T_UWORD wo;
+struct{
+T_UBYTE msb;
+T_UBYTE lsb;
+}by;
+}T_BYTEFLD;
 
-# 56
-typedef unsigned short long int uint24_t;
 
-# 63
-typedef unsigned long int uint32_t;
+typedef union{
+T_ULONG lo;
+struct {
+T_UBYTE highword_msb;
+T_UBYTE highword_lsb;
+T_UBYTE lowword_msb;
+T_UBYTE lowword_lsb;
+} by;
 
-# 71
-typedef signed char int_least8_t;
+struct {
+T_UWORD highword;
+T_UWORD lowword;
+} wo;
 
-# 78
-typedef signed int int_least16_t;
+}T_BYTEFLD32;
 
-# 90
-typedef signed short long int int_least24_t;
 
-# 98
-typedef signed long int int_least32_t;
+typedef union {
+T_UBYTE by;
+T_BITFLD8 bi;
+}T_FLAG8;
 
-# 105
-typedef unsigned char uint_least8_t;
 
-# 111
-typedef unsigned int uint_least16_t;
+typedef union {
+T_BYTEFLD cr;
+T_BITFLD16 bi;
+}T_FLAG16;
 
-# 121
-typedef unsigned short long int uint_least24_t;
 
-# 128
-typedef unsigned long int uint_least32_t;
+typedef union {
+T_BYTEFLD32 cr;
+T_BITFLD32 bi;
+}T_FLAG32;
 
-# 137
-typedef signed char int_fast8_t;
+
+typedef enum
+{
+BFALSE = 0u,
+BTRUE
+}E_BOOLEAN;
+
+# 18 "app/app_LED.h"
+extern void app_LED_Task(void);
+
+# 132 "app/../mcc_generated_files/pin_manager.h"
+void PIN_MANAGER_Initialize (void);
 
 # 144
-typedef signed int int_fast16_t;
+void PIN_MANAGER_IOC(void);
 
-# 156
-typedef signed short long int int_fast24_t;
-
-# 164
-typedef signed long int int_fast32_t;
-
-# 171
-typedef unsigned char uint_fast8_t;
-
-# 177
-typedef unsigned int uint_fast16_t;
-
-# 187
-typedef unsigned short long int uint_fast24_t;
-
-# 194
-typedef unsigned long int uint_fast32_t;
-
-# 200
-typedef int32_t intmax_t;
-
-
-
-
-typedef uint32_t uintmax_t;
-
-
-
-
-typedef int16_t intptr_t;
-
-
-
-
-typedef uint16_t uintptr_t;
-
-# 76 "mcc_generated_files/eusart1.h"
-extern volatile uint8_t eusart1TxBufferRemaining;
-extern volatile uint8_t eusart1RxCount;
-
-# 105
-void EUSART1_Initialize(void);
-
-# 154
-uint8_t EUSART1_Read(void);
-
-# 179
-void EUSART1_Write(uint8_t txData);
-
-# 200
-void EUSART1_Transmit_ISR(void);
-
-# 221
-void EUSART1_Receive_ISR(void);
-
-# 61 "mcc_generated_files/eusart1.c"
-static uint8_t eusart1TxHead = 0;
-static uint8_t eusart1TxTail = 0;
-static uint8_t eusart1TxBuffer[8];
-volatile uint8_t eusart1TxBufferRemaining;
-
-static uint8_t eusart1RxHead = 0;
-static uint8_t eusart1RxTail = 0;
-static uint8_t eusart1RxBuffer[8];
-volatile uint8_t eusart1RxCount;
-
-# 75
-void EUSART1_Initialize(void)
+# 11 "app/app_LED.c"
+void app_LED_Task(void)
 {
-
-PIE3bits.RC1IE = 0;
-PIE3bits.TX1IE = 0;
-
-
-
-
-BAUD1CON = 0x08;
-
-
-RC1STA = 0x80;
-
-
-TX1STA = 0x65;
-
-
-SP1BRGL = 0x3F;
-
-
-SP1BRGH = 0x00;
-
-
-
-eusart1TxHead = 0;
-eusart1TxTail = 0;
-eusart1TxBufferRemaining = sizeof(eusart1TxBuffer);
-
-eusart1RxHead = 0;
-eusart1RxTail = 0;
-eusart1RxCount = 0;
-
-
-
+do { LATBbits.LATB0 = ~LATBbits.LATB0; } while(0);
+do { LATBbits.LATB1 = ~LATBbits.LATB1; } while(0);
+do { LATBbits.LATB2 = ~LATBbits.LATB2; } while(0);
 }
-
-uint8_t EUSART1_Read(void)
-{
-uint8_t readValue = 0;
-RC1STAbits.CREN = 1;
-
-while(0 == eusart1RxCount)
-{
-}
-
-readValue = eusart1RxBuffer[eusart1RxTail++];
-if(sizeof(eusart1RxBuffer) <= eusart1RxTail)
-{
-eusart1RxTail = 0;
-}
-PIE3bits.RC1IE = 0;
-eusart1RxCount--;
-PIE3bits.RC1IE = 1;
-
-return readValue;
-}
-
-void EUSART1_Write(uint8_t txData)
-{
-while(0 == eusart1TxBufferRemaining)
-{
-}
-
-if(0 == PIE3bits.TX1IE)
-{
-TX1REG = txData;
-}
-else
-{
-PIE3bits.TX1IE = 0;
-eusart1TxBuffer[eusart1TxHead++] = txData;
-if(sizeof(eusart1TxBuffer) <= eusart1TxHead)
-{
-eusart1TxHead = 0;
-}
-eusart1TxBufferRemaining--;
-}
-PIE3bits.TX1IE = 1;
-}
-
-void EUSART1_Transmit_ISR(void)
-{
-
-# 172
-}
-
-void EUSART1_Receive_ISR(void)
-{
-
-if(1 == RC1STAbits.OERR)
-{
-
-
-RC1STAbits.CREN = 0;
-RC1STAbits.CREN = 1;
-}
-
-
-eusart1RxBuffer[eusart1RxHead++] = RC1REG;
-if(sizeof(eusart1RxBuffer) <= eusart1RxHead)
-{
-eusart1RxHead = 0;
-}
-eusart1RxCount++;
-}
-

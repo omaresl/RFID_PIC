@@ -1,14 +1,12 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "110 mcc_generated_files/interrupt_manager.h
 [v _INTERRUPT_Initialize `(v ~T0 @X0 0 ef ]
-"224 mcc_generated_files/pin_manager.h
+"132 mcc_generated_files/pin_manager.h
 [v _PIN_MANAGER_Initialize `(v ~T0 @X0 0 ef ]
-"84 mcc_generated_files/mcc.h
+"83 mcc_generated_files/mcc.h
 [v _OSCILLATOR_Initialize `(v ~T0 @X0 0 ef ]
 "100 mcc_generated_files/tmr1.h
 [v _TMR1_Initialize `(v ~T0 @X0 0 ef ]
-"105 mcc_generated_files/eusart1.h
-[v _EUSART1_Initialize `(v ~T0 @X0 0 ef ]
 "4998 C:\Program Files (x86)\Microchip\xc8\v1.38\include\pic18f46k40.h
 [v _OSCCON1 `Vuc ~T0 @X0 0 e@3800 ]
 "5136
@@ -28,7 +26,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "54
 [p x CSWEN=ON ]
 "55
-[p x FCMEN=ON ]
+[p x FCMEN=OFF ]
 "58
 [p x MCLRE=EXTMCLR ]
 "59
@@ -46,7 +44,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "67
 [p x STVREN=ON ]
 "68
-[p x DEBUG=OFF ]
+[p x DEBUG=ON ]
 "69
 [p x XINST=OFF ]
 "72
@@ -10935,8 +10933,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 157: extern __nonreentrant void _delay(unsigned long);
 [; ;pic18.h: 159: extern __nonreentrant void _delaywdt(unsigned long);
 [; ;pic18.h: 161: extern __nonreentrant void _delay3(unsigned char);
-[; ;pin_manager.h: 224: void PIN_MANAGER_Initialize (void);
-[; ;pin_manager.h: 236: void PIN_MANAGER_IOC(void);
+[; ;pin_manager.h: 132: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 144: void PIN_MANAGER_IOC(void);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -10981,13 +10979,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;tmr1.h: 403: void TMR1_SetInterruptHandler(void *InterruptHandler);
 [; ;tmr1.h: 421: extern void (*TMR1_InterruptHandler)(void);
 [; ;tmr1.h: 439: void TMR1_DefaultInterruptHandler(void);
-[; ;eusart1.h: 76: extern volatile uint8_t eusart1TxBufferRemaining;
-[; ;eusart1.h: 77: extern volatile uint8_t eusart1RxCount;
-[; ;eusart1.h: 105: void EUSART1_Initialize(void);
-[; ;eusart1.h: 154: uint8_t EUSART1_Read(void);
-[; ;eusart1.h: 179: void EUSART1_Write(uint8_t txData);
-[; ;eusart1.h: 200: void EUSART1_Transmit_ISR(void);
-[; ;eusart1.h: 221: void EUSART1_Receive_ISR(void);
 [; ;memory.h: 98: uint8_t FLASH_ReadByte(uint32_t flashAddr);
 [; ;memory.h: 124: uint16_t FLASH_ReadWord(uint32_t flashAddr);
 [; ;memory.h: 156: void FLASH_WriteByte(uint32_t flashAddr, uint8_t *flashRdBufPtr, uint8_t byte);
@@ -10995,8 +10986,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;memory.h: 217: void FLASH_EraseBlock(uint32_t baseAddr);
 [; ;memory.h: 248: void DATAEE_WriteByte(uint16_t bAdd, uint8_t bData);
 [; ;memory.h: 274: uint8_t DATAEE_ReadByte(uint16_t bAdd);
-[; ;mcc.h: 71: void SYSTEM_Initialize(void);
-[; ;mcc.h: 84: void OSCILLATOR_Initialize(void);
+[; ;mcc.h: 70: void SYSTEM_Initialize(void);
+[; ;mcc.h: 83: void OSCILLATOR_Initialize(void);
 "107 mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize `(v ~T0 @X0 1 ef ]
 "108
@@ -11017,37 +11008,34 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mcc.c: 113: TMR1_Initialize();
 "113
 [e ( _TMR1_Initialize ..  ]
-[; ;mcc.c: 114: EUSART1_Initialize();
+[; ;mcc.c: 114: }
 "114
-[e ( _EUSART1_Initialize ..  ]
-[; ;mcc.c: 115: }
-"115
 [e :UE 1476 ]
 }
-"117
+"116
 [v _OSCILLATOR_Initialize `(v ~T0 @X0 1 ef ]
-"118
+"117
 {
-[; ;mcc.c: 117: void OSCILLATOR_Initialize(void)
-[; ;mcc.c: 118: {
+[; ;mcc.c: 116: void OSCILLATOR_Initialize(void)
+[; ;mcc.c: 117: {
 [e :U _OSCILLATOR_Initialize ]
 [f ]
-[; ;mcc.c: 120: OSCCON1 = 0x60;
-"120
+[; ;mcc.c: 119: OSCCON1 = 0x60;
+"119
 [e = _OSCCON1 -> -> 96 `i `uc ]
-[; ;mcc.c: 122: OSCCON3 = 0x40;
-"122
+[; ;mcc.c: 121: OSCCON3 = 0x40;
+"121
 [e = _OSCCON3 -> -> 64 `i `uc ]
-[; ;mcc.c: 124: OSCEN = 0x00;
-"124
+[; ;mcc.c: 123: OSCEN = 0x00;
+"123
 [e = _OSCEN -> -> 0 `i `uc ]
-[; ;mcc.c: 126: OSCFRQ = 0x08;
-"126
+[; ;mcc.c: 125: OSCFRQ = 0x08;
+"125
 [e = _OSCFRQ -> -> 8 `i `uc ]
-[; ;mcc.c: 128: OSCTUNE = 0x00;
-"128
+[; ;mcc.c: 127: OSCTUNE = 0x00;
+"127
 [e = _OSCTUNE -> -> 0 `i `uc ]
-[; ;mcc.c: 131: }
-"131
+[; ;mcc.c: 130: }
+"130
 [e :UE 1477 ]
 }
