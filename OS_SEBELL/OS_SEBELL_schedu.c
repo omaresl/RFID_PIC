@@ -26,7 +26,7 @@ const FCT_POINTER tasks_list[MAX_TASKS] =
 		&TASK_DUMMY,//64tk
 		&TASK_DUMMY,//128tk
         &TASK_DUMMY,//256tk
-        &TASK_DUMMY,//512tk
+        &periodic_task_512tk,//512tk
         &periodic_task_1024tk,//1024tk
         &TASK_DUMMY,//2048tk
         &TASK_DUMMY,//4096tk

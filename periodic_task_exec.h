@@ -19,6 +19,7 @@ extern "C" {
     extern void periodic_task_4tk(void);
     extern void periodic_task_8tk(void);
     extern void periodic_task_32tk(void);
+    extern void periodic_task_512tk(void);
     extern void periodic_task_1024tk(void);
     extern void TASK_DUMMY(void);
 
