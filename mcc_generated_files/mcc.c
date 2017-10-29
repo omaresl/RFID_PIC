@@ -13,7 +13,7 @@
   @Description:
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.0
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15.3
         Device            :  PIC18F46K40
         Driver Version    :  1.02
     The generated drivers are tested against the following:
@@ -106,12 +106,12 @@
 
 void SYSTEM_Initialize(void)
 {
-    
+
     INTERRUPT_Initialize();
     PIN_MANAGER_Initialize();
     OSCILLATOR_Initialize();
     TMR1_Initialize();
-    EUSART1_Initialize();
+    EUSART2_Initialize();
 }
 
 void OSCILLATOR_Initialize(void)
@@ -126,12 +126,9 @@ void OSCILLATOR_Initialize(void)
     OSCFRQ = 0x08;
     // TUN 0; 
     OSCTUNE = 0x00;
-    // Set the secondary oscillator
-    
 }
 
 
-        
 /**
  End of File
 */

@@ -13,7 +13,7 @@
   @Description
     This source file provides APIs for TMR1.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.0
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15.3
         Device            :  PIC18F46K40
         Driver Version    :  2.00
     The generated drivers are tested against the following:
@@ -51,6 +51,7 @@
 #include "tmr1.h"
 #include "../OS_SEBELL/OS_SEBELL_sched.h"
 #include "../Headers/stdtypedef.h"
+#include "../app/app_RC522.h"
 
 /**
   Section: Global Variables Definitions
@@ -72,7 +73,7 @@ void TMR1_Initialize(void)
     //T1GE disabled; T1GTM disabled; T1GPOL low; T1GGO done; T1GSPM disabled; 
     T1GCON = 0x00;
 
-    //GSS T1G; 
+    //GSS T1G_pin; 
     T1GATE = 0x00;
 
     //CS FOSC/4; 
@@ -191,6 +192,9 @@ void TMR1_DefaultInterruptHandler(void){
     // add your TMR1 interrupt custom code
     // or set custom function using TMR1_SetInterruptHandler()
     sch_alarm = TRUE;
+    
+    /* RC522 Timeout Task */
+    app_RC522_TimeoutTask();
 }
 
 /**

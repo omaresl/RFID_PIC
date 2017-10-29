@@ -13,7 +13,7 @@
   @Description:
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.0
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15.3
         Device            :  PIC18F46K40
         Version           :  1.02
     The generated drivers are tested against the following:
@@ -50,9 +50,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "interrupt_manager.h"
-#include "memory.h"
 #include "tmr1.h"
-#include "eusart1.h"
+#include "eusart2.h"
+#include "memory.h"
 
 #define _XTAL_FREQ  64000000
 
@@ -84,7 +84,6 @@ void SYSTEM_Initialize(void);
 void OSCILLATOR_Initialize(void);
 
 
-        
 
 #endif	/* MCC_H */
 /**

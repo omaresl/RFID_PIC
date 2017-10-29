@@ -19,7 +19,7 @@
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.35
         MPLAB             :  MPLAB X 3.20
-*/
+ */
 
 /*
     (c) 2016 Microchip Technology Inc. and its subsidiaries. You may use this
@@ -41,58 +41,33 @@
 
     MICROCHIP PROVIDES THIS SOFTWARE CONDITIONALLY UPON YOUR ACCEPTANCE OF THESE
     TERMS.
-*/
+ */
 
 #include "mcc_generated_files/mcc.h"
 #include "app/app_init.h"
 #include "OS_SEBELL/OS_SEBELL_sched.h"
+#include <stdio.h>
 
 /*
                          Main application
  */
-void main(void)
-{
+void main(void) {
     // Initialize the device
     SYSTEM_Initialize();
 
-    // If using interrupts in PIC18 High/Low Priority Mode you need to enable the Global High and Low Interrupts
-    // If using interrupts in PIC Mid-Range Compatibility Mode you need to enable the Global and Peripheral Interrupts
-    // Use the following macros to:
+    /*Init application*/
+    InitApp();
 
-    // Enable high priority global interrupts
-    //INTERRUPT_GlobalInterruptHighEnable();
+    /*Enable Interrupts after Initialization*/
+    INTERRUPT_GlobalInterruptHighEnable();
+    INTERRUPT_GlobalInterruptLowEnable();
+    
+    printf("\nRFID Ready...\n");
 
-    // Enable low priority global interrupts.
-    //INTERRUPT_GlobalInterruptLowEnable();
+    scheduler_loop();
+    // Add your application code
 
-    // Disable high priority global interrupts
-    //INTERRUPT_GlobalInterruptHighDisable();
-
-    // Disable low priority global interrupts.
-    //INTERRUPT_GlobalInterruptLowDisable();
-
-    // Enable the Global Interrupts
-    //INTERRUPT_GlobalInterruptEnable();
-
-    // Enable the Peripheral Interrupts
-    //INTERRUPT_PeripheralInterruptEnable();
-
-    // Disable the Global Interrupts
-    //INTERRUPT_GlobalInterruptDisable();
-
-    // Disable the Peripheral Interrupts
-    //INTERRUPT_PeripheralInterruptDisable();
-    while (1)
-    {
-        InitApp();/*Init application*/
-        
-        INTERRUPT_GlobalInterruptHighEnable();
-        INTERRUPT_GlobalInterruptLowEnable();      
-        
-        scheduler_loop();
-        // Add your application code
-    }
 }
 /**
  End of File
-*/
+ */

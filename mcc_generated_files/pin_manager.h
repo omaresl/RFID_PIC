@@ -13,7 +13,7 @@
   @Description:
     This header file provides implementations for pin APIs for all pins selected in the GUI.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.0
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15.3
         Device            :  PIC18F46K40
         Version           :  1.01
     The generated drivers are tested against the following:
@@ -119,29 +119,49 @@
 #define IO_RB2_SetAnalogMode()  do { ANSELBbits.ANSELB2 = 1; } while(0)
 #define IO_RB2_SetDigitalMode() do { ANSELBbits.ANSELB2 = 0; } while(0)
 
-// get/set RC6 procedures
-#define RC6_SetHigh()    do { LATCbits.LATC6 = 1; } while(0)
-#define RC6_SetLow()   do { LATCbits.LATC6 = 0; } while(0)
-#define RC6_Toggle()   do { LATCbits.LATC6 = ~LATCbits.LATC6; } while(0)
-#define RC6_GetValue()         PORTCbits.RC6
-#define RC6_SetDigitalInput()   do { TRISCbits.TRISC6 = 1; } while(0)
-#define RC6_SetDigitalOutput()  do { TRISCbits.TRISC6 = 0; } while(0)
-#define RC6_SetPullup()     do { WPUCbits.WPUC6 = 1; } while(0)
-#define RC6_ResetPullup()   do { WPUCbits.WPUC6 = 0; } while(0)
-#define RC6_SetAnalogMode() do { ANSELCbits.ANSELC6 = 1; } while(0)
-#define RC6_SetDigitalMode()do { ANSELCbits.ANSELC6 = 0; } while(0)
+// get/set IO_RD5 aliases
+#define IO_RD5_TRIS               TRISDbits.TRISD5
+#define IO_RD5_LAT                LATDbits.LATD5
+#define IO_RD5_PORT               PORTDbits.RD5
+#define IO_RD5_WPU                WPUDbits.WPUD5
+#define IO_RD5_OD                ODCONDbits.ODCD5
+#define IO_RD5_ANS                ANSELDbits.ANSELD5
+#define IO_RD5_SetHigh()            do { LATDbits.LATD5 = 1; } while(0)
+#define IO_RD5_SetLow()             do { LATDbits.LATD5 = 0; } while(0)
+#define IO_RD5_Toggle()             do { LATDbits.LATD5 = ~LATDbits.LATD5; } while(0)
+#define IO_RD5_GetValue()           PORTDbits.RD5
+#define IO_RD5_SetDigitalInput()    do { TRISDbits.TRISD5 = 1; } while(0)
+#define IO_RD5_SetDigitalOutput()   do { TRISDbits.TRISD5 = 0; } while(0)
+#define IO_RD5_SetPullup()      do { WPUDbits.WPUD5 = 1; } while(0)
+#define IO_RD5_ResetPullup()    do { WPUDbits.WPUD5 = 0; } while(0)
+#define IO_RD5_SetPushPull()    do { ODCONDbits.ODCD5 = 1; } while(0)
+#define IO_RD5_SetOpenDrain()   do { ODCONDbits.ODCD5 = 0; } while(0)
+#define IO_RD5_SetAnalogMode()  do { ANSELDbits.ANSELD5 = 1; } while(0)
+#define IO_RD5_SetDigitalMode() do { ANSELDbits.ANSELD5 = 0; } while(0)
 
-// get/set RC7 procedures
-#define RC7_SetHigh()    do { LATCbits.LATC7 = 1; } while(0)
-#define RC7_SetLow()   do { LATCbits.LATC7 = 0; } while(0)
-#define RC7_Toggle()   do { LATCbits.LATC7 = ~LATCbits.LATC7; } while(0)
-#define RC7_GetValue()         PORTCbits.RC7
-#define RC7_SetDigitalInput()   do { TRISCbits.TRISC7 = 1; } while(0)
-#define RC7_SetDigitalOutput()  do { TRISCbits.TRISC7 = 0; } while(0)
-#define RC7_SetPullup()     do { WPUCbits.WPUC7 = 1; } while(0)
-#define RC7_ResetPullup()   do { WPUCbits.WPUC7 = 0; } while(0)
-#define RC7_SetAnalogMode() do { ANSELCbits.ANSELC7 = 1; } while(0)
-#define RC7_SetDigitalMode()do { ANSELCbits.ANSELC7 = 0; } while(0)
+// get/set RD6 procedures
+#define RD6_SetHigh()    do { LATDbits.LATD6 = 1; } while(0)
+#define RD6_SetLow()   do { LATDbits.LATD6 = 0; } while(0)
+#define RD6_Toggle()   do { LATDbits.LATD6 = ~LATDbits.LATD6; } while(0)
+#define RD6_GetValue()         PORTDbits.RD6
+#define RD6_SetDigitalInput()   do { TRISDbits.TRISD6 = 1; } while(0)
+#define RD6_SetDigitalOutput()  do { TRISDbits.TRISD6 = 0; } while(0)
+#define RD6_SetPullup()     do { WPUDbits.WPUD6 = 1; } while(0)
+#define RD6_ResetPullup()   do { WPUDbits.WPUD6 = 0; } while(0)
+#define RD6_SetAnalogMode() do { ANSELDbits.ANSELD6 = 1; } while(0)
+#define RD6_SetDigitalMode()do { ANSELDbits.ANSELD6 = 0; } while(0)
+
+// get/set RD7 procedures
+#define RD7_SetHigh()    do { LATDbits.LATD7 = 1; } while(0)
+#define RD7_SetLow()   do { LATDbits.LATD7 = 0; } while(0)
+#define RD7_Toggle()   do { LATDbits.LATD7 = ~LATDbits.LATD7; } while(0)
+#define RD7_GetValue()         PORTDbits.RD7
+#define RD7_SetDigitalInput()   do { TRISDbits.TRISD7 = 1; } while(0)
+#define RD7_SetDigitalOutput()  do { TRISDbits.TRISD7 = 0; } while(0)
+#define RD7_SetPullup()     do { WPUDbits.WPUD7 = 1; } while(0)
+#define RD7_ResetPullup()   do { WPUDbits.WPUD7 = 0; } while(0)
+#define RD7_SetAnalogMode() do { ANSELDbits.ANSELD7 = 1; } while(0)
+#define RD7_SetDigitalMode()do { ANSELDbits.ANSELD7 = 0; } while(0)
 
 /**
    @Param

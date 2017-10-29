@@ -13,7 +13,7 @@
   @Description
     This header file provides APIs for driver for TMR1.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.0
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15.3
         Device            :  PIC18F46K40
         Driver Version    :  2.00
     The generated drivers are tested against the following:
@@ -365,7 +365,6 @@ uint8_t TMR1_CheckGateValueStatus(void);
     None
 */
 void TMR1_ISR(void);
-
 /**
   @Summary
     CallBack function.

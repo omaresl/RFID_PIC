@@ -15,7 +15,7 @@
     For individual peripheral handlers please see the peripheral driver for
     all modules selected in the GUI.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.0
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15.3
         Device            :  PIC18F46K40
         Driver Version    :  1.02
     The generated drivers are tested against the following:
@@ -55,8 +55,11 @@ void  INTERRUPT_Initialize (void)
 
     // Assign peripheral interrupt priority vectors
 
+    // TXI - high priority
+    IPR3bits.TX2IP = 1;
+
     // RCI - high priority
-    IPR3bits.RC1IP = 1;
+    IPR3bits.RC2IP = 1;
 
     // TMRI - high priority
     IPR4bits.TMR1IP = 1;
@@ -67,9 +70,13 @@ void  INTERRUPT_Initialize (void)
 void interrupt INTERRUPT_InterruptManagerHigh (void)
 {
    // interrupt handler
-    if(PIE3bits.RC1IE == 1 && PIR3bits.RC1IF == 1)
+    if(PIE3bits.TX2IE == 1 && PIR3bits.TX2IF == 1)
     {
-        EUSART1_Receive_ISR();
+        EUSART2_Transmit_ISR();
+    }
+    if(PIE3bits.RC2IE == 1 && PIR3bits.RC2IF == 1)
+    {
+        EUSART2_Receive_ISR();
     }
     if(PIE4bits.TMR1IE == 1 && PIR4bits.TMR1IF == 1)
     {

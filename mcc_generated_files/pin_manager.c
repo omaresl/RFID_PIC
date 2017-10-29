@@ -13,7 +13,7 @@
   Description:
     This header file provides implementations for pin APIs for all pins selected in the GUI.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.0
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15.3
         Device            :  PIC18F46K40
         Driver Version    :  1.02
     The generated drivers are tested against the following:
@@ -65,8 +65,8 @@ void PIN_MANAGER_Initialize(void)
     TRISE = 0x07;
     TRISA = 0xFF;
     TRISB = 0x78;
-    TRISC = 0xBF;
-    TRISD = 0xFF;
+    TRISC = 0x7F;
+    TRISD = 0x5F;
 
     /**
     ANSELx registers
@@ -106,8 +106,8 @@ void PIN_MANAGER_Initialize(void)
     PPSLOCK = 0xAA;
     PPSLOCKbits.PPSLOCKED = 0x00; // unlock PPS
 
-    RX1PPSbits.RXPPS = 0x17;   //RC7->EUSART1:RX1;
-    RC6PPS = 0x09;   //RC6->EUSART1:TX1;
+    RX2PPSbits.RXPPS = 0x1E;   //RD6->EUSART2:RX2;
+    RD7PPS = 0x0B;   //RD7->EUSART2:TX2;
 
     PPSLOCK = 0x55;
     PPSLOCK = 0xAA;

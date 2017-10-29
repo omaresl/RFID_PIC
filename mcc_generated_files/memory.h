@@ -13,7 +13,7 @@
   @Description
     This header file provides APIs for driver for MEMORY.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.0
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15.3
         Device            :  PIC18F46K40
         Driver Version    :  2.00
     The generated drivers are tested against the following:
@@ -273,6 +273,7 @@ void DATAEE_WriteByte(uint16_t bAdd, uint8_t bData);
 */
 uint8_t DATAEE_ReadByte(uint16_t bAdd);
 
+void MEMORY_Tasks(void);
 
 #ifdef __cplusplus  // Provide C++ Compatibility
 

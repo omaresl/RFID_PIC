@@ -9,6 +9,8 @@
 #define APP_RC522_H_
 
 #include "../Headers/stdtypedef.h"
+#include "../mcc_generated_files/pin_manager.h"
+#include "../mcc_generated_files/eusart2.h"
 
 #define APP_RC522_BUFFER_MAX_LENGTH	20U
 
@@ -85,7 +87,8 @@ typedef enum
 /*RESET PIN*/
 #define APP_RC_522_RESET_ENABLE				FALSE
 #define APP_RC_522_RESET_DISABLE			TRUE
-#define APP_RC_522_RESET_SET_PIN()			
+#define APP_RC_522_RESET_SET_PIN()          IO_RD5_SetLow()
+#define APP_RC_522_RESET_CLEAR_PIN()        IO_RD5_SetHigh()
 
 /*MX PIN*/
 
@@ -96,14 +99,18 @@ typedef enum
 /* TX PIN */
 
 /* Communication Interface */
-#define APP_RC522_COMM_INTERFACE_SEND(dataToSend)	
-#define APP_RC522_COMM_INTERFACE_RECEIVE()          FALSE		
+#define APP_RC522_COMM_INTERFACE_SEND(dataToSend)	EUSART2_Write((T_UBYTE)dataToSend)
+#define APP_RC522_COMM_INTERFACE_RECEIVE()          EUSART2_Read()	
 
 /* Timeout Definitions */
 #define APP_RC522_TIMER_VALUE				(T_UBYTE)16U //20ms (16 times for 2.5ms)
 #define APP_RC522_TIMER_STOP(timer)			timer = 0;
 #define APP_RC522_TIMER_IS_STOPPED(timer)	(T_UBYTE)(timer == 0)
 #define APP_RC522_TIMER_LOAD(timer)			timer = APP_RC522_TIMER_VALUE;
+
+/* Error Manager */
+#define APP_RC522_COUNT_FOR_ERROR           ((T_UBYTE)10U)
+#define APP_RC522_MODULE_IS_FAIL()          ((T_UBYTE)(rub_ErrorMatureCounter >= APP_RC522_COUNT_FOR_ERROR))
 
 /******************************************************************************
  * Definitions
@@ -185,7 +192,6 @@ typedef enum
  ***************************************/
 extern T_UBYTE raub_RC522_FIFOData[APP_RC522_BUFFER_MAX_LENGTH];
 extern T_UWORD ruw_RC522_FIFOReceivedLength;
-extern T_UBYTE rub_RC522WatchDog;
 
 /***************************************
  * Prototypes						   *
@@ -195,5 +201,7 @@ extern T_UBYTE app_RC522_ReadRegister(T_UBYTE lub_Address);
 extern T_UBYTE app_RC522_WriteRegister(T_UBYTE lub_Address, T_UBYTE lub_Value);
 extern T_UBYTE app_RC522_IsANewCardPresent(void);
 extern void app_RC522_TaskMng(void);
+extern void app_RC522_TimeoutTask(void);
+extern T_UBYTE app_RC522_ModuleIsFail(void);
 
 #endif /* APP_RC522_H_ */

@@ -1,19 +1,19 @@
 /**
-  EUSART1 Generated Driver API Header File
+  EUSART2 Generated Driver API Header File
 
   @Company
     Microchip Technology Inc.
 
   @File Name
-    eusart1.h
+    eusart2.h
 
   @Summary
-    This is the generated header file for the EUSART1 driver using MPLAB(c) Code Configurator
+    This is the generated header file for the EUSART2 driver using MPLAB(c) Code Configurator
 
   @Description
-    This header file provides APIs for driver for EUSART1.
+    This header file provides APIs for driver for EUSART2.
     Generation Information :
-        Product Revision  :  MPLAB(c) Code Configurator - 4.0
+        Product Revision  :  MPLAB(c) Code Configurator - 4.15.3
         Device            :  PIC18F46K40
         Driver Version    :  2.00
     The generated drivers are tested against the following:
@@ -43,8 +43,8 @@
     TERMS.
 */
 
-#ifndef _EUSART1_H
-#define _EUSART1_H
+#ifndef _EUSART2_H
+#define _EUSART2_H
 
 /**
   Section: Included Files
@@ -65,7 +65,7 @@
   Section: Macro Declarations
 */
 
-#define EUSART1_DataReady  (eusart1RxCount)
+#define EUSART2_DataReady  (eusart2RxCount)
 
 /**
   Section: Data Type Definitions
@@ -74,21 +74,21 @@
 /**
  Section: Global variables
  */
-extern volatile uint8_t eusart1TxBufferRemaining;
-extern volatile uint8_t eusart1RxCount;
+extern volatile uint8_t eusart2TxBufferRemaining;
+extern volatile uint8_t eusart2RxCount;
 
 
 /**
-  Section: EUSART1 APIs
+  Section: EUSART2 APIs
 */
 
 /**
   @Summary
-    Initialization routine that takes inputs from the EUSART1 GUI.
+    Initialization routine that takes inputs from the EUSART2 GUI.
 
   @Description
-    This routine initializes the EUSART1 driver.
-    This routine must be called before any other EUSART1 routine is called.
+    This routine initializes the EUSART2 driver.
+    This routine must be called before any other EUSART2 routine is called.
 
   @Preconditions
     None
@@ -103,21 +103,21 @@ extern volatile uint8_t eusart1RxCount;
 
   @Example
 */
-void EUSART1_Initialize(void);
+void EUSART2_Initialize(void);
 
 /**
   @Summary
-    Read a byte of data from the EUSART1.
+    Read a byte of data from the EUSART2.
 
   @Description
-    This routine reads a byte of data from the EUSART1.
+    This routine reads a byte of data from the EUSART2.
 
   @Preconditions
-    EUSART1_Initialize() function should have been called
+    EUSART2_Initialize() function should have been called
     before calling this function. The transfer status should be checked to see
     if the receiver is not empty before calling this function.
 	
-	EUSART1_DataReady is a macro which checks if any byte is received.
+	EUSART2_DataReady is a macro which checks if any byte is received.
 	Call this macro before using this function.
 
   @Param
@@ -152,32 +152,32 @@ void EUSART1_Initialize(void);
 							}
     </code>
 */
-uint8_t EUSART1_Read(void);
+uint8_t EUSART2_Read(void);
 
  /**
   @Summary
-    Writes a byte of data to the EUSART1.
+    Writes a byte of data to the EUSART2.
 
   @Description
-    This routine writes a byte of data to the EUSART1.
+    This routine writes a byte of data to the EUSART2.
 
   @Preconditions
-    EUSART1_Initialize() function should have been called
+    EUSART2_Initialize() function should have been called
     before calling this function. The transfer status should be checked to see
     if transmitter is not busy before calling this function.
 
   @Param
-    txData  - Data byte to write to the EUSART1
+    txData  - Data byte to write to the EUSART2
 
   @Returns
     None
   
   @Example
       <code>
-          Refer to EUSART1_Read() for an example	
+          Refer to EUSART2_Read() for an example	
       </code>
 */
-void EUSART1_Write(uint8_t txData);
+void EUSART2_Write(uint8_t txData);
 
 /**
   @Summary
@@ -189,7 +189,7 @@ void EUSART1_Write(uint8_t txData);
     transmitter needs to be maintained in a non polled manner.
 
   @Preconditions
-    EUSART1_Initialize() function should have been called
+    EUSART2_Initialize() function should have been called
     for the ISR to execute correctly.
 
   @Param
@@ -198,7 +198,7 @@ void EUSART1_Write(uint8_t txData);
   @Returns
     None
 */
-void EUSART1_Transmit_ISR(void);
+void EUSART2_Transmit_ISR(void);
 
 /**
   @Summary
@@ -210,7 +210,7 @@ void EUSART1_Transmit_ISR(void);
     receiver needs to be maintained in a non polled manner.
 
   @Preconditions
-    EUSART1_Initialize() function should have been called
+    EUSART2_Initialize() function should have been called
     for the ISR to execute correctly.
 
   @Param
@@ -219,7 +219,7 @@ void EUSART1_Transmit_ISR(void);
   @Returns
     None
 */
-void EUSART1_Receive_ISR(void);
+void EUSART2_Receive_ISR(void);
 
 #ifdef __cplusplus  // Provide C++ Compatibility
 
@@ -227,7 +227,7 @@ void EUSART1_Receive_ISR(void);
 
 #endif
 
-#endif  // _EUSART1_H
+#endif  // _EUSART2_H
 /**
  End of File
 */
