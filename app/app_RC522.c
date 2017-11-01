@@ -35,6 +35,7 @@ static T_UBYTE rub_WriteRequestFlag = FALSE;
 static T_UBYTE rub_ErrorMatureCounter = 0U;
 static T_UBYTE rub_RC522DematureCounter = 0U;
 static T_UBYTE rub_FailureFlag = FALSE;
+static T_UBYTE rub_RC522_TimeoutFlag = FALSE;
 
 /***************************************
  * Prototypes						   *
@@ -482,7 +483,7 @@ static T_UBYTE app_RC522_ToCard(T_UBYTE lub_command, T_UBYTE *lpub_sendData, T_U
 
     lub_Error = (app_RC522_ReadRegister(ErrorReg) & 0x1B); //BufferOvfl Collerr CRCErr ProtecolErr
     lub_Error |= (lub_n & 0x01);
-    lub_Error |= rub_FailureFlag; //Timeout
+    lub_Error |= rub_RC522_TimeoutFlag; //Timeout
 
     /* Check for errors */
     if (lub_Error == 0U) {//No errors
@@ -681,6 +682,14 @@ void app_RC522_TimeoutTask(void) {
         /* Do Nothing */
     } else {
         rub_RC522WatchDog--;
+        if((APP_RC522_TIMER_IS_STOPPED(rub_RC522WatchDog) == TRUE))
+        {
+            rub_RC522_TimeoutFlag = TRUE;
+        }
+        else
+        {
+            /* Do Nothing */
+        }
     }
 }
 

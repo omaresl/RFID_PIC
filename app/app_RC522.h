@@ -106,7 +106,8 @@ typedef enum
 #define APP_RC522_TIMER_VALUE				(T_UBYTE)100U //100ms (16 times for 1ms)
 #define APP_RC522_TIMER_STOP(timer)			timer = 0;
 #define APP_RC522_TIMER_IS_STOPPED(timer)	(T_UBYTE)(timer == 0)
-#define APP_RC522_TIMER_LOAD(timer)			timer = APP_RC522_TIMER_VALUE;
+#define APP_RC522_TIMER_LOAD(timer)			timer = APP_RC522_TIMER_VALUE; \
+                                            rub_RC522_TimeoutFlag = FALSE
 
 /* Error Manager */
 #define APP_RC522_COUNT_FOR_ERROR           ((T_UBYTE)10U)
