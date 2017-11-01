@@ -47,6 +47,7 @@
   Section: Included Files
 */
 #include "eusart2.h"
+#include "interrupt_manager.h"
 
 /**
   Section: EUSART2 APIs
@@ -76,7 +77,7 @@ void EUSART2_Initialize(void)
 
 uint8_t EUSART2_Read(void)
 {
-    
+    INTERRUPT_GlobalInterruptHighDisable();
     while(!PIR3bits.RC2IF)
     {
     }
@@ -89,7 +90,7 @@ uint8_t EUSART2_Read(void)
         RC2STAbits.SPEN = 0; 
         RC2STAbits.SPEN = 1; 
     }
-
+    INTERRUPT_GlobalInterruptHighEnable();
     return RC2REG;
 }
 

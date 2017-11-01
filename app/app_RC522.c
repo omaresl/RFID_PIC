@@ -8,6 +8,7 @@
 #include "../Headers/system.h"
 #include "../Headers/stdtypedef.h"
 #include "../mcc_generated_files/eusart2.h"
+#include "../mcc_generated_files/interrupt_manager.h"
 #include "app_RC522.h"
 #include "app_UART.h"
 #include "app_LED.h"
@@ -96,12 +97,6 @@ void app_RC522_TaskMng(void) {
             {
                 if (app_RC522_Anticoll(raub_RC522_FIFOData) == STATUS_OK) {
                     for (T_UBYTE i = 0; i < ruw_RC522_FIFOReceivedLength; i++) {
-                        if (raub_RC522_FIFOData[i] < 0x10) {
-
-                        } else {
-
-                        }
-
                         if (i < APP_RC522_ID_SIZE) {
                             raub_CardID[i] = raub_RC522_FIFOData[i];
                         } else {
@@ -123,14 +118,7 @@ void app_RC522_TaskMng(void) {
 
             case RC522_STATE_SELECT_CARD:
             {
-                if (app_RC522_SelectCard(raub_CardID, 4) == STATUS_OK) {
-                    for (T_UBYTE i = 0; i < ruw_RC522_FIFOReceivedLength; i++) {
-                        if (raub_RC522_FIFOData[i] < 0x10) {
-
-                        } else {
-
-                        }
-                    }
+                if (app_RC522_SelectCard(raub_CardID, APP_RC522_ID_SIZE) == STATUS_OK) {
                     /* Go to next state after INIT */
                     re_RC522_NextState = RC522_STATE_CARD_SEARCH;
                     /* Reset the Transceiver */
@@ -239,9 +227,12 @@ void app_RC522_Init(void) {
     /* UART Configuration */
 
     //Get default config
+    BAUD2CON = 0x00;
+    RC2STA = 0x00;
+    TX2STA = 0x00;
 
     //Init UART
-    //EUSART2_Initialize();
+    EUSART2_Initialize();
 
     //Enable Interrupts
 
@@ -251,12 +242,12 @@ void app_RC522_Init(void) {
     T_UBYTE lub_Result = 0U;
 
     //Set RC522 baud rate to 19200
-    //lub_Result |= app_RC522_WriteRegister(SerialSpeedReg, 0x7AU);
+    lub_Result |= app_RC522_WriteRegister(SerialSpeedReg, 0xCBU);
 
     //Set UART baud rate to 19200
-    //app_UART_SetBaudRate();
+    app_UART_SetBaudRate();
 
-    //lub_Result = app_RC522_ReadRegister(SerialSpeedReg);
+    lub_Result = app_RC522_ReadRegister(SerialSpeedReg);
 
     // Reset baud rates
     app_RC522_WriteRegister(TxModeReg, 0x00);
@@ -283,14 +274,9 @@ void app_RC522_Init(void) {
  **********************************************************/
 T_UBYTE app_RC522_ReadRegister(T_UBYTE lub_Address) {
     T_UBYTE lub_DataToSend;
-    T_UBYTE lub_RXData;
 
     //Adjust data
     lub_DataToSend = ((lub_Address) | 0x80);
-
-    // EUSART2 error - restart
-    RC2STAbits.CREN = 0;
-    RC2STAbits.CREN = 1;
 
     APP_RC522_COMM_INTERFACE_SEND(lub_DataToSend);
 
@@ -323,13 +309,10 @@ T_UBYTE app_RC522_WriteRegister(T_UBYTE lub_Address, T_UBYTE lub_Value) {
     lub_Return = STATUS_ERROR;
 
     //Adjust data
-    lub_DataToSend = (lub_Address);
+    lub_DataToSend = (lub_Address & ~(0x80U));
 
     //Start written
-    // EUSART2 error - restart
-    RC2STAbits.CREN = 0;
-    RC2STAbits.CREN = 1;
-
+    
     APP_RC522_COMM_INTERFACE_SEND(lub_DataToSend);
 
     /*Start TImeout Timer*/
@@ -345,7 +328,6 @@ T_UBYTE app_RC522_WriteRegister(T_UBYTE lub_Address, T_UBYTE lub_Value) {
         //Confirm address
         if (APP_RC522_COMM_INTERFACE_RECEIVE() == lub_DataToSend) {
             APP_RC522_COMM_INTERFACE_SEND(lub_Value);
-
             while (IO_RD4_GetValue() == TRUE) {
                 /* Wait Write */
             }
@@ -360,7 +342,6 @@ T_UBYTE app_RC522_WriteRegister(T_UBYTE lub_Address, T_UBYTE lub_Value) {
 
         lub_Return = STATUS_ERROR;
     }
-
     return lub_Return;
 }
 
@@ -470,14 +451,13 @@ static T_UBYTE app_RC522_ToCard(T_UBYTE lub_command, T_UBYTE *lpub_sendData, T_U
     do {
         lub_n = app_RC522_ReadRegister(CommIrqReg);
     } while (((lub_n & 0x01) == 0U) &&
-            ((lub_n & lub_waitIRq) == 0U) &&
+            ((lub_n & lub_waitIRq) != lub_waitIRq) &&
             (APP_RC522_TIMER_IS_STOPPED(rub_RC522WatchDog) == FALSE)); //Check watch dog
     
     APP_RC522_TIMER_STOP(rub_RC522WatchDog);
 
     /* Stop Transmission */
     app_RC522_ClearRegisterBitMask(BitFramingReg, 0x80);
-    app_RC522_WriteRegister(CommandReg, PCD_Idle);
 
     T_UBYTE lub_Error = 0;
 

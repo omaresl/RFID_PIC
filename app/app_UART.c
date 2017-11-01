@@ -35,8 +35,8 @@ void app_UART_SetBaudRate(void) {
     TX2STA = 0x24;
 
     // Baud Rate = 19200; SP2BRGL 208; 
-    SP2BRGL = 0x88;
+    SP2BRGL = 0x40;
 
     // Baud Rate = 19200; SP2BRGH 0; 
-    SP2BRGH = 0x00;
+    SP2BRGH = 0x03;
 }
