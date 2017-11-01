@@ -37,6 +37,7 @@ static T_UBYTE rub_ErrorMatureCounter = 0U;
 static T_UBYTE rub_RC522DematureCounter = 0U;
 static T_UBYTE rub_FailureFlag = FALSE;
 static T_UBYTE rub_RC522_TimeoutFlag = FALSE;
+static T_UBYTE rub_EraseRequestFlag = FALSE;
 
 /***************************************
  * Prototypes						   *
@@ -154,10 +155,12 @@ void app_RC522_TaskMng(void) {
                 if (app_RC522_ReadBlock(lub_BlockAddress, raub_RC522_FIFOData, &ruw_RC522_FIFOReceivedLength) == STATUS_OK) {
                     /* Check if Tag Data is valid */
                     if (app_RC522_CompareData(&raub_RC522_FIFOData, &caub_RC522_TagData, ruw_RC522_FIFOReceivedLength) == TRUE) {
+                        LED_RED_OFF();
                         LED_BLUE_ON();
                         /*TODO: Access Granted*/
                     } else {
                         /* Do Nothing */
+                        LED_BLUE_OFF();
                         LED_RED_ON();
                     }
 
@@ -312,7 +315,7 @@ T_UBYTE app_RC522_WriteRegister(T_UBYTE lub_Address, T_UBYTE lub_Value) {
     lub_DataToSend = (lub_Address & ~(0x80U));
 
     //Start written
-    
+
     APP_RC522_COMM_INTERFACE_SEND(lub_DataToSend);
 
     /*Start TImeout Timer*/
@@ -436,7 +439,7 @@ static T_UBYTE app_RC522_ToCard(T_UBYTE lub_command, T_UBYTE *lpub_sendData, T_U
     for (lub_i = 0; lub_i < lub_sendLen; lub_i++) {
         app_RC522_WriteRegister(FIFODataReg, *(lpub_sendData + lub_i));
     }
-    
+
     app_RC522_ClearRegisterBitMask(CommIrqReg, 0x80);
     /* Command Execution */
     app_RC522_WriteRegister(CommandReg, lub_command);
@@ -453,7 +456,7 @@ static T_UBYTE app_RC522_ToCard(T_UBYTE lub_command, T_UBYTE *lpub_sendData, T_U
     } while (((lub_n & 0x01) == 0U) &&
             ((lub_n & lub_waitIRq) != lub_waitIRq) &&
             (APP_RC522_TIMER_IS_STOPPED(rub_RC522WatchDog) == FALSE)); //Check watch dog
-    
+
     APP_RC522_TIMER_STOP(rub_RC522WatchDog);
 
     /* Stop Transmission */
@@ -642,7 +645,12 @@ static T_UBYTE app_RC522_WriteBlock(T_UBYTE lub_BlockAddr, T_UBYTE *lpub_recvDat
     if (lub_status == STATUS_OK) {
         /* Prepare data to store into CARD */
         for (T_UBYTE i = 0; i < 16U; i++) {
-            lpub_recvData[i] = caub_RC522_TagData[i];
+            if (rub_EraseRequestFlag == TRUE) {
+                lpub_recvData[i] = 0;
+            } else {
+                lpub_recvData[i] = caub_RC522_TagData[i];
+            }
+
         }
         app_RC522_CalculateCRC(lpub_recvData, 16, &lpub_recvData[16]);
         lub_status = app_RC522_ToCard(PCD_Transceive, lpub_recvData, 18, lpub_recvData, luw_unLen);
@@ -662,12 +670,9 @@ void app_RC522_TimeoutTask(void) {
         /* Do Nothing */
     } else {
         rub_RC522WatchDog--;
-        if((APP_RC522_TIMER_IS_STOPPED(rub_RC522WatchDog) == TRUE))
-        {
+        if ((APP_RC522_TIMER_IS_STOPPED(rub_RC522WatchDog) == TRUE)) {
             rub_RC522_TimeoutFlag = TRUE;
-        }
-        else
-        {
+        } else {
             /* Do Nothing */
         }
     }
@@ -730,4 +735,21 @@ static T_UBYTE app_RC522_CompareData(T_UBYTE *lpub_A, T_UBYTE *lpub_B, T_UBYTE l
     }
 
     return lub_Result;
+}
+
+/**********************************************************
+ * Name: app_RC522_WriteRequest
+ * Description: TBD
+ **********************************************************/
+void app_RC522_WriteRequest(void) {
+    rub_WriteRequestFlag = TRUE;
+}
+
+/**********************************************************
+ * Name: app_RC522_EraseRequest
+ * Description: TBD
+ **********************************************************/
+void app_RC522_EraseRequest(void) {
+    rub_WriteRequestFlag = TRUE;
+    rub_EraseRequestFlag = TRUE;
 }

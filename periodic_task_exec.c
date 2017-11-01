@@ -23,6 +23,20 @@ void periodic_task_8tk(void) {
 }
 
 void periodic_task_32tk(void) {
+    if(IO_RD0_GetValue() == FALSE)
+    {
+        app_RC522_WriteRequest();
+        LED_GREEN_ON();
+    }
+    else if(IO_RD2_GetValue() == FALSE)
+    {
+        app_RC522_EraseRequest();
+        LED_GREEN_ON();
+    }
+    else
+    {
+        LED_GREEN_OFF();
+    }
     return;
 }
 

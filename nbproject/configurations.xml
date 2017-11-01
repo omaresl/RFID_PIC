@@ -33,6 +33,8 @@
         <itemPath>app/app_RC522.h</itemPath>
         <itemPath>app/app_UART.c</itemPath>
         <itemPath>app/app_UART.h</itemPath>
+        <itemPath>app/app_Access.c</itemPath>
+        <itemPath>app/app_Access.h</itemPath>
       </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
@@ -178,6 +180,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

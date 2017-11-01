@@ -209,5 +209,7 @@ extern T_UBYTE app_RC522_IsANewCardPresent(void);
 extern void app_RC522_TaskMng(void);
 extern void app_RC522_TimeoutTask(void);
 extern T_UBYTE app_RC522_ModuleIsFail(void);
+extern void app_RC522_WriteRequest(void);
+extern void app_RC522_EraseRequest(void);
 
 #endif /* APP_RC522_H_ */

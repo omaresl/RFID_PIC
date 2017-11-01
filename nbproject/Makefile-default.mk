@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=app/app_init.c app/app_LED.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/memory.c mcc_generated_files/interrupt_manager.c mcc_generated_files/tmr1.c mcc_generated_files/eusart2.c OS_SEBELL/OS_SEBELL_schedu.c OS_SEBELL/OS_SEBELL_sched_util.c main.c periodic_task_exec.c powerup.as app/app_RC522.c app/app_UART.c
+SOURCEFILES_QUOTED_IF_SPACED=app/app_init.c app/app_LED.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/memory.c mcc_generated_files/interrupt_manager.c mcc_generated_files/tmr1.c mcc_generated_files/eusart2.c OS_SEBELL/OS_SEBELL_schedu.c OS_SEBELL/OS_SEBELL_sched_util.c main.c periodic_task_exec.c powerup.as app/app_RC522.c app/app_UART.c app/app_Access.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/app/app_init.p1 ${OBJECTDIR}/app/app_LED.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/memory.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/tmr1.p1 ${OBJECTDIR}/mcc_generated_files/eusart2.p1 ${OBJECTDIR}/OS_SEBELL/OS_SEBELL_schedu.p1 ${OBJECTDIR}/OS_SEBELL/OS_SEBELL_sched_util.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/periodic_task_exec.p1 ${OBJECTDIR}/powerup.obj ${OBJECTDIR}/app/app_RC522.p1 ${OBJECTDIR}/app/app_UART.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/app/app_init.p1.d ${OBJECTDIR}/app/app_LED.p1.d ${OBJECTDIR}/mcc_generated_files/mcc.p1.d ${OBJECTDIR}/mcc_generated_files/pin_manager.p1.d ${OBJECTDIR}/mcc_generated_files/memory.p1.d ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1.d ${OBJECTDIR}/mcc_generated_files/tmr1.p1.d ${OBJECTDIR}/mcc_generated_files/eusart2.p1.d ${OBJECTDIR}/OS_SEBELL/OS_SEBELL_schedu.p1.d ${OBJECTDIR}/OS_SEBELL/OS_SEBELL_sched_util.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/periodic_task_exec.p1.d ${OBJECTDIR}/powerup.obj.d ${OBJECTDIR}/app/app_RC522.p1.d ${OBJECTDIR}/app/app_UART.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/app/app_init.p1 ${OBJECTDIR}/app/app_LED.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/memory.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/tmr1.p1 ${OBJECTDIR}/mcc_generated_files/eusart2.p1 ${OBJECTDIR}/OS_SEBELL/OS_SEBELL_schedu.p1 ${OBJECTDIR}/OS_SEBELL/OS_SEBELL_sched_util.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/periodic_task_exec.p1 ${OBJECTDIR}/powerup.obj ${OBJECTDIR}/app/app_RC522.p1 ${OBJECTDIR}/app/app_UART.p1 ${OBJECTDIR}/app/app_Access.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/app/app_init.p1.d ${OBJECTDIR}/app/app_LED.p1.d ${OBJECTDIR}/mcc_generated_files/mcc.p1.d ${OBJECTDIR}/mcc_generated_files/pin_manager.p1.d ${OBJECTDIR}/mcc_generated_files/memory.p1.d ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1.d ${OBJECTDIR}/mcc_generated_files/tmr1.p1.d ${OBJECTDIR}/mcc_generated_files/eusart2.p1.d ${OBJECTDIR}/OS_SEBELL/OS_SEBELL_schedu.p1.d ${OBJECTDIR}/OS_SEBELL/OS_SEBELL_sched_util.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/periodic_task_exec.p1.d ${OBJECTDIR}/powerup.obj.d ${OBJECTDIR}/app/app_RC522.p1.d ${OBJECTDIR}/app/app_UART.p1.d ${OBJECTDIR}/app/app_Access.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/app/app_init.p1 ${OBJECTDIR}/app/app_LED.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/memory.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/tmr1.p1 ${OBJECTDIR}/mcc_generated_files/eusart2.p1 ${OBJECTDIR}/OS_SEBELL/OS_SEBELL_schedu.p1 ${OBJECTDIR}/OS_SEBELL/OS_SEBELL_sched_util.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/periodic_task_exec.p1 ${OBJECTDIR}/powerup.obj ${OBJECTDIR}/app/app_RC522.p1 ${OBJECTDIR}/app/app_UART.p1
+OBJECTFILES=${OBJECTDIR}/app/app_init.p1 ${OBJECTDIR}/app/app_LED.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/memory.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/tmr1.p1 ${OBJECTDIR}/mcc_generated_files/eusart2.p1 ${OBJECTDIR}/OS_SEBELL/OS_SEBELL_schedu.p1 ${OBJECTDIR}/OS_SEBELL/OS_SEBELL_sched_util.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/periodic_task_exec.p1 ${OBJECTDIR}/powerup.obj ${OBJECTDIR}/app/app_RC522.p1 ${OBJECTDIR}/app/app_UART.p1 ${OBJECTDIR}/app/app_Access.p1
 
 # Source Files
-SOURCEFILES=app/app_init.c app/app_LED.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/memory.c mcc_generated_files/interrupt_manager.c mcc_generated_files/tmr1.c mcc_generated_files/eusart2.c OS_SEBELL/OS_SEBELL_schedu.c OS_SEBELL/OS_SEBELL_sched_util.c main.c periodic_task_exec.c powerup.as app/app_RC522.c app/app_UART.c
+SOURCEFILES=app/app_init.c app/app_LED.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/memory.c mcc_generated_files/interrupt_manager.c mcc_generated_files/tmr1.c mcc_generated_files/eusart2.c OS_SEBELL/OS_SEBELL_schedu.c OS_SEBELL/OS_SEBELL_sched_util.c main.c periodic_task_exec.c powerup.as app/app_RC522.c app/app_UART.c app/app_Access.c
 
 
 CFLAGS=
@@ -205,6 +205,14 @@ ${OBJECTDIR}/app/app_UART.p1: app/app_UART.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/app/app_UART.d ${OBJECTDIR}/app/app_UART.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/app/app_UART.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/app/app_Access.p1: app/app_Access.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/app" 
+	@${RM} ${OBJECTDIR}/app/app_Access.p1.d 
+	@${RM} ${OBJECTDIR}/app/app_Access.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --emi=wordwrite --opt=+asm,+asmfile,-speed,+space,-debug,-local --addrqual=ignore --mode=free -P -N255 -I"Headers" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,-plib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/app/app_Access.p1  app/app_Access.c 
+	@-${MV} ${OBJECTDIR}/app/app_Access.d ${OBJECTDIR}/app/app_Access.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/app/app_Access.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/app/app_init.p1: app/app_init.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/app" 
@@ -317,6 +325,14 @@ ${OBJECTDIR}/app/app_UART.p1: app/app_UART.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=+asm,+asmfile,-speed,+space,-debug,-local --addrqual=ignore --mode=free -P -N255 -I"Headers" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,-plib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/app/app_UART.p1  app/app_UART.c 
 	@-${MV} ${OBJECTDIR}/app/app_UART.d ${OBJECTDIR}/app/app_UART.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/app/app_UART.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/app/app_Access.p1: app/app_Access.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/app" 
+	@${RM} ${OBJECTDIR}/app/app_Access.p1.d 
+	@${RM} ${OBJECTDIR}/app/app_Access.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=+asm,+asmfile,-speed,+space,-debug,-local --addrqual=ignore --mode=free -P -N255 -I"Headers" --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,-plib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/app/app_Access.p1  app/app_Access.c 
+	@-${MV} ${OBJECTDIR}/app/app_Access.d ${OBJECTDIR}/app/app_Access.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/app/app_Access.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 
