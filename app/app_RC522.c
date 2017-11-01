@@ -7,7 +7,10 @@
 
 #include "../Headers/system.h"
 #include "../Headers/stdtypedef.h"
+#include "../mcc_generated_files/eusart2.h"
 #include "app_RC522.h"
+#include "app_UART.h"
+#include "app_LED.h"
 
 
 /***************************************
@@ -17,6 +20,7 @@
 #define	APP_RC522_KEY_SIZE	6U
 
 const T_UBYTE caub_RC522_Key[APP_RC522_KEY_SIZE] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+const T_UBYTE caub_RC522_TagData[] = "SantaAnitaResidencial";
 
 /***************************************
  * Variables						   *
@@ -29,6 +33,8 @@ static E_RC522_STATES re_RC522State = RC522_STATE_INIT;
 static E_RC522_STATES re_RC522_NextState = RC522_STATE_CARD_SEARCH;
 static T_UBYTE rub_WriteRequestFlag = FALSE;
 static T_UBYTE rub_ErrorMatureCounter = 0U;
+static T_UBYTE rub_RC522DematureCounter = 0U;
+static T_UBYTE rub_FailureFlag = FALSE;
 
 /***************************************
  * Prototypes						   *
@@ -43,6 +49,8 @@ static T_UBYTE app_RC522_Anticoll(T_UBYTE *lpub_serNum);
 static T_UBYTE app_RC522_SelectCard(T_UBYTE *lpub_CardID, T_UBYTE lub_IDSize);
 static T_UBYTE app_RC522_Authenticate(T_UBYTE lub_Command, T_UBYTE lub_BlockAddress, const T_UBYTE *lpub_Key, T_UBYTE *lpub_CardID);
 static T_UBYTE app_RC522_WriteBlock(T_UBYTE lub_BlockAddr, T_UBYTE *lpub_recvData, T_UWORD *luw_unLen);
+static void app_RC522_FailCondition(void);
+static T_UBYTE app_RC522_CompareData(T_UBYTE *lpub_A, T_UBYTE *lpub_B, T_UBYTE lub_Length);
 
 
 /***************************************
@@ -75,6 +83,8 @@ void app_RC522_TaskMng(void) {
                     re_RC522_NextState = RC522_STATE_CARD_SEARCH;
                     /* Reset the Transceiver */
                     re_RC522State = RC522_STATE_INIT;
+
+                    LED_BLUE_OFF();
                 }
 
             }
@@ -104,7 +114,7 @@ void app_RC522_TaskMng(void) {
                     /* Go to next state after INIT */
                     re_RC522_NextState = RC522_STATE_CARD_SEARCH;
                     /* Reset the Transceiver */
-                    re_RC522State = RC522_STATE_INIT;
+                    re_RC522State = RC522_STATE_CARD_SEARCH;
                 }
             }
                 break;
@@ -152,6 +162,14 @@ void app_RC522_TaskMng(void) {
                 lub_BlockAddress = 4U; //Block address 4 corresponds to Block 0 in sector 1
                 ruw_RC522_FIFOReceivedLength = 18U;
                 if (app_RC522_ReadBlock(lub_BlockAddress, raub_RC522_FIFOData, &ruw_RC522_FIFOReceivedLength) == STATUS_OK) {
+                    /* Check if Tag Data is valid */
+                    if (app_RC522_CompareData(&raub_RC522_FIFOData, &caub_RC522_TagData, 16U) == TRUE) {
+                        LED_BLUE_ON();
+                        /*TODO: Access Granted*/
+                    } else {
+                        /* Do Nothing */
+                    }
+
 
                 } else {
 
@@ -206,7 +224,7 @@ void app_RC522_Init(void) {
     //Config RST PIN
     APP_RC_522_RESET_SET_PIN(); //Reset Module
 
-    APP_RC_522_RESET_CLEAR_PIN(); //Normal Mode
+
     //Config MX PIN
 
     //Config DTRQ PIN
@@ -220,23 +238,28 @@ void app_RC522_Init(void) {
     //Get default config
 
     //Init UART
+    //EUSART2_Initialize();
 
     //Enable Interrupts
 
     //Disable Reset (High is disable)
+    APP_RC_522_RESET_CLEAR_PIN(); //Normal Mode
 
     T_UBYTE lub_Result = 0U;
 
-    //Set RC522 baud rate to 115200
+    //Set RC522 baud rate to 19200
     //lub_Result |= app_RC522_WriteRegister(SerialSpeedReg, 0x7AU);
 
-    //Set UART baud rate to 115200
+    //Set UART baud rate to 19200
+    //app_UART_SetBaudRate();
+
+    //lub_Result = app_RC522_ReadRegister(SerialSpeedReg);
 
     // Reset baud rates
     app_RC522_WriteRegister(TxModeReg, 0x00);
     app_RC522_WriteRegister(RxModeReg, 0x00);
     // Reset ModWidthReg
-    lub_Result |= app_RC522_WriteRegister(ModWidthReg, 0x26);
+    lub_Result = app_RC522_WriteRegister(ModWidthReg, 0x26);
     // When communicating with a PICC we need a timeout if something goes wrong.
     // f_timer = 13.56 MHz / (2*TPreScaler+1) where TPreScaler = [TPrescaler_Hi:TPrescaler_Lo].
     // TPrescaler_Hi are the four low bits in TModeReg. TPrescaler_Lo is TPrescalerReg.
@@ -258,29 +281,29 @@ void app_RC522_Init(void) {
 T_UBYTE app_RC522_ReadRegister(T_UBYTE lub_Address) {
     T_UBYTE lub_DataToSend;
     T_UBYTE lub_RXData;
-    ;
 
     //Adjust data
     lub_DataToSend = ((lub_Address) | 0x80);
 
-    APP_RC522_COMM_INTERFACE_SEND(lub_DataToSend);
+    // EUSART2 error - restart
+    RC2STAbits.CREN = 0;
+    RC2STAbits.CREN = 1;
 
-    lub_RXData = 0U;
+    APP_RC522_COMM_INTERFACE_SEND(lub_DataToSend);
 
     /*Start TImeout Timer*/
     APP_RC522_TIMER_LOAD(rub_RC522WatchDog);
-    while (lub_RXData == 0U && APP_RC522_TIMER_IS_STOPPED(rub_RC522WatchDog) == FALSE) {
-        lub_RXData = eusart2RxCount;
+    while (EUSART2_DataReady == 0U && APP_RC522_TIMER_IS_STOPPED(rub_RC522WatchDog) == FALSE) {
+        /*Wait Data*/
     }
     /* Stop Timer */
     APP_RC522_TIMER_STOP(rub_RC522WatchDog);
 
     /* Check if there was a reception */
-    if (eusart2RxCount > 0U) {
+    if (EUSART2_DataReady != 0U) {
         return APP_RC522_COMM_INTERFACE_RECEIVE();
     } else {//Not RX Data
-        /* Increase  Error Mature Counter */
-        rub_ErrorMatureCounter++;
+        app_RC522_FailCondition();
         return 0U;
     }
 }
@@ -300,31 +323,38 @@ T_UBYTE app_RC522_WriteRegister(T_UBYTE lub_Address, T_UBYTE lub_Value) {
     lub_DataToSend = (lub_Address);
 
     //Start written
+    // EUSART2 error - restart
+    RC2STAbits.CREN = 0;
+    RC2STAbits.CREN = 1;
+
     APP_RC522_COMM_INTERFACE_SEND(lub_DataToSend);
 
     /*Start TImeout Timer*/
     APP_RC522_TIMER_LOAD(rub_RC522WatchDog);
-    while (eusart2RxCount == 0U && APP_RC522_TIMER_IS_STOPPED(rub_RC522WatchDog) == FALSE) {
+    while (EUSART2_DataReady == 0U && APP_RC522_TIMER_IS_STOPPED(rub_RC522WatchDog) == FALSE) {
         /* Wait for reception */
     }
     /* Stop Timer */
     APP_RC522_TIMER_STOP(rub_RC522WatchDog);
 
     /* Check if there was a reception */
-    if (eusart2RxCount > 0U) {
+    if (EUSART2_DataReady > 0U) {
         //Confirm address
         if (APP_RC522_COMM_INTERFACE_RECEIVE() == lub_DataToSend) {
             APP_RC522_COMM_INTERFACE_SEND(lub_Value);
 
+            while (IO_RD4_GetValue() == TRUE) {
+                /* Wait Write */
+            }
+
             lub_Return = STATUS_OK;
         } else {
             //Address Confirmation Failed
-            lub_Return = STATUS_ERROR;
         }
     } else {//No RX. Timeout Passed
-        /* Increase  Error Mature Counter */
-        rub_ErrorMatureCounter++;
-        
+
+        app_RC522_FailCondition();
+
         lub_Return = STATUS_ERROR;
     }
 
@@ -435,18 +465,19 @@ static T_UBYTE app_RC522_ToCard(T_UBYTE lub_command, T_UBYTE *lpub_sendData, T_U
     APP_RC522_TIMER_LOAD(rub_RC522WatchDog); //Load WatchDog
     do {
         lub_n = app_RC522_ReadRegister(CommIrqReg);
-    } while (((lub_n & 0x01) == 0U) &&
+    } while (/*((lub_n & 0x01) == 0U) &&*/
             ((lub_n & lub_waitIRq) == 0U) &&
             (APP_RC522_TIMER_IS_STOPPED(rub_RC522WatchDog) == FALSE)); //Check watch dog
 
     /* Stop Transmission */
     app_RC522_ClearRegisterBitMask(BitFramingReg, 0x80);
+    app_RC522_WriteRegister(CommandReg, PCD_Idle);
 
-    T_UBYTE lub_Error;
+    T_UBYTE lub_Error = 0;
 
     lub_Error = (app_RC522_ReadRegister(ErrorReg) & 0x1B); //BufferOvfl Collerr CRCErr ProtecolErr
     lub_Error |= (lub_n & 0x01);
-    lub_Error |= APP_RC522_TIMER_IS_STOPPED(rub_RC522WatchDog); //Timeout
+    lub_Error |= rub_FailureFlag; //Timeout
 
     /* Check for errors */
     if (lub_Error == 0U) {//No errors
@@ -625,7 +656,7 @@ static T_UBYTE app_RC522_WriteBlock(T_UBYTE lub_BlockAddr, T_UBYTE *lpub_recvDat
     if (lub_status == STATUS_OK) {
         /* Prepare data to store into CARD */
         for (T_UBYTE i = 0; i < 16U; i++) {
-            lpub_recvData[i] = i;
+            lpub_recvData[i] = caub_RC522_TagData[i];
         }
         app_RC522_CalculateCRC(lpub_recvData, 16, &lpub_recvData[16]);
         lub_status = app_RC522_ToCard(PCD_Transceive, lpub_recvData, 18, lpub_recvData, luw_unLen);
@@ -653,5 +684,56 @@ void app_RC522_TimeoutTask(void) {
  * Description: TBD
  **********************************************************/
 T_UBYTE app_RC522_ModuleIsFail(void) {
+
+    if (APP_RC522_MODULE_IS_FAIL() == TRUE) {
+        if (rub_RC522DematureCounter > 0U) {
+            rub_RC522DematureCounter--;
+        } else {
+            rub_FailureFlag = FALSE;
+            re_RC522State = RC522_STATE_INIT;
+            re_RC522_NextState = RC522_STATE_CARD_SEARCH;
+            rub_ErrorMatureCounter = 0U;
+            LED_RED_OFF();
+        }
+    } else {
+        /* Do Nothing */
+    }
     return APP_RC522_MODULE_IS_FAIL();
+}
+
+/**********************************************************
+ * Name: app_RC522_FailCondition
+ * Description: TBD
+ **********************************************************/
+static void app_RC522_FailCondition(void) {
+    if (APP_RC522_MODULE_IS_FAIL() == FALSE) {
+        /* Increase  Error Mature Counter */
+        rub_ErrorMatureCounter++;
+        if (APP_RC522_MODULE_IS_FAIL() == TRUE) {
+            rub_FailureFlag = TRUE;
+        }
+    } else {
+        rub_RC522DematureCounter = 10U;
+    }
+}
+
+/**********************************************************
+ * Name: app_RC522_CompareData
+ * Description: TBD
+ **********************************************************/
+static T_UBYTE app_RC522_CompareData(T_UBYTE *lpub_A, T_UBYTE *lpub_B, T_UBYTE lub_Length) {
+    T_UBYTE lub_Result;
+
+    /* Initialize the return value */
+    lub_Result = TRUE;
+
+    /* Compare each byte */
+    for (T_UBYTE lub_i; lub_i < lub_Length; lub_i++) {
+        if (*(lpub_A + lub_i) != *(lpub_B + lub_i)) {
+            /* Difference */
+            lub_Result = FALSE;
+        }
+    }
+
+    return lub_Result;
 }

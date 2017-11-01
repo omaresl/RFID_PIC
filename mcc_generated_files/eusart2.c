@@ -49,35 +49,11 @@
 #include "eusart2.h"
 
 /**
-  Section: Macro Declarations
-*/
-#define EUSART2_TX_BUFFER_SIZE 8
-#define EUSART2_RX_BUFFER_SIZE 8
-
-/**
-  Section: Global Variables
-*/
-
-volatile uint8_t eusart2TxHead = 0;
-volatile uint8_t eusart2TxTail = 0;
-volatile uint8_t eusart2TxBuffer[EUSART2_TX_BUFFER_SIZE];
-volatile uint8_t eusart2TxBufferRemaining;
-
-volatile uint8_t eusart2RxHead = 0;
-volatile uint8_t eusart2RxTail = 0;
-volatile uint8_t eusart2RxBuffer[EUSART2_RX_BUFFER_SIZE];
-volatile uint8_t eusart2RxCount;
-
-/**
   Section: EUSART2 APIs
 */
 
 void EUSART2_Initialize(void)
 {
-    // disable interrupts before changing states
-    PIE3bits.RC2IE = 0;
-    PIE3bits.TX2IE = 0;
-
     // Set the EUSART2 module to the options selected in the user interface.
 
     // ABDOVF no_overflow; SCKP Non-Inverted; BRG16 16bit_generator; WUE disabled; ABDEN disabled; 
@@ -95,111 +71,36 @@ void EUSART2_Initialize(void)
     // Baud Rate = 9600; SP2BRGH 6; 
     SP2BRGH = 0x06;
 
-
-    // initializing the driver state
-    eusart2TxHead = 0;
-    eusart2TxTail = 0;
-    eusart2TxBufferRemaining = sizeof(eusart2TxBuffer);
-
-    eusart2RxHead = 0;
-    eusart2RxTail = 0;
-    eusart2RxCount = 0;
-
-    // enable receive interrupt
-    PIE3bits.RC2IE = 1;
 }
+
 
 uint8_t EUSART2_Read(void)
 {
-    uint8_t readValue  = 0;
     
-    while(0 == eusart2RxCount)
+    while(!PIR3bits.RC2IF)
     {
     }
 
-    readValue = eusart2RxBuffer[eusart2RxTail++];
-    if(sizeof(eusart2RxBuffer) <= eusart2RxTail)
-    {
-        eusart2RxTail = 0;
-    }
-    PIE3bits.RC2IE = 0;
-    eusart2RxCount--;
-    PIE3bits.RC2IE = 1;
 
-    return readValue;
+    if(1 == RC2STAbits.OERR)
+{
+        // EUSART2 error - restart
+
+        RC2STAbits.SPEN = 0; 
+        RC2STAbits.SPEN = 1; 
+    }
+
+    return RC2REG;
 }
 
 void EUSART2_Write(uint8_t txData)
 {
-    while(0 == eusart2TxBufferRemaining)
-    {
-    }
-
-    if(0 == PIE3bits.TX2IE)
-    {
-        TX2REG = txData;
-    }
-    else
-    {
-        PIE3bits.TX2IE = 0;
-        eusart2TxBuffer[eusart2TxHead++] = txData;
-        if(sizeof(eusart2TxBuffer) <= eusart2TxHead)
-        {
-            eusart2TxHead = 0;
+    while(0 == PIR3bits.TX2IF)
+{
         }
-        eusart2TxBufferRemaining--;
+
+    TX2REG = txData;    // Write the data byte to the USART.
     }
-    PIE3bits.TX2IE = 1;
-}
-
-char getch(void)
-{
-    return EUSART2_Read();
-}
-
-void putch(char txData)
-{
-    EUSART2_Write(txData);
-}
-
-void EUSART2_Transmit_ISR(void)
-{
-
-    // add your EUSART2 interrupt custom code
-    if(sizeof(eusart2TxBuffer) > eusart2TxBufferRemaining)
-    {
-        TX2REG = eusart2TxBuffer[eusart2TxTail++];
-        if(sizeof(eusart2TxBuffer) <= eusart2TxTail)
-        {
-            eusart2TxTail = 0;
-        }
-        eusart2TxBufferRemaining++;
-    }
-    else
-    {
-        PIE3bits.TX2IE = 0;
-    }
-}
-
-void EUSART2_Receive_ISR(void)
-{
-
-    if(1 == RC2STAbits.OERR)
-    {
-        // EUSART2 error - restart
-
-        RC2STAbits.CREN = 0;
-        RC2STAbits.CREN = 1;
-    }
-
-    // buffer overruns are ignored
-    eusart2RxBuffer[eusart2RxHead++] = RC2REG;
-    if(sizeof(eusart2RxBuffer) <= eusart2RxHead)
-    {
-        eusart2RxHead = 0;
-    }
-    eusart2RxCount++;
-}
 /**
   End of File
 */
