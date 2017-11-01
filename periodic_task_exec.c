@@ -13,12 +13,12 @@ void periodic_task_2tk(void) {
 }
 
 void periodic_task_4tk(void) {
-    /* RC522 Task */
-    app_RC522_TaskMng();
     return;
 }
 
 void periodic_task_8tk(void) {
+    /* RC522 Task */
+    app_RC522_TaskMng();
     return;
 }
 

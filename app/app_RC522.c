@@ -153,7 +153,7 @@ void app_RC522_TaskMng(void) {
                 ruw_RC522_FIFOReceivedLength = 18U;
                 if (app_RC522_ReadBlock(lub_BlockAddress, raub_RC522_FIFOData, &ruw_RC522_FIFOReceivedLength) == STATUS_OK) {
                     /* Check if Tag Data is valid */
-                    if (app_RC522_CompareData(&raub_RC522_FIFOData, &caub_RC522_TagData, 16U) == TRUE) {
+                    if (app_RC522_CompareData(&raub_RC522_FIFOData, &caub_RC522_TagData, ruw_RC522_FIFOReceivedLength) == TRUE) {
                         LED_BLUE_ON();
                         /*TODO: Access Granted*/
                     } else {
@@ -242,7 +242,7 @@ void app_RC522_Init(void) {
     T_UBYTE lub_Result = 0U;
 
     //Set RC522 baud rate to 19200
-    lub_Result |= app_RC522_WriteRegister(SerialSpeedReg, 0xCBU);
+    lub_Result |= app_RC522_WriteRegister(SerialSpeedReg, 0x9AU);
 
     //Set UART baud rate to 19200
     app_UART_SetBaudRate();

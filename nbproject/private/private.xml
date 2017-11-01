@@ -3,15 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/uidj2522/Desktop/RFID_PIC/RFID_PIC/mcc_generated_files/tmr1.c</file>
-            <file>file:/C:/Users/uidj2522/Desktop/RFID_PIC/RFID_PIC/main.c</file>
-            <file>file:/C:/Users/uidj2522/Desktop/RFID_PIC/RFID_PIC/mcc_generated_files/interrupt_manager.c</file>
-            <file>file:/C:/Users/uidj2522/Desktop/RFID_PIC/RFID_PIC/OS_SEBELL/OS_SEBELL_schedu.c</file>
-            <file>file:/C:/Users/uidj2522/Desktop/RFID_PIC/RFID_PIC/app/app_init.c</file>
-            <file>file:/C:/Users/uidj2522/Desktop/RFID_PIC/RFID_PIC/mcc_generated_files/mcc.c</file>
-            <file>file:/C:/Users/uidj2522/Desktop/RFID_PIC/RFID_PIC/app/app_LED.c</file>
+            <file>file:/C:/Users/uidj2522/Desktop/RFID_PIC/RFID_PIC/app/app_RC522.c</file>
+            <file>file:/C:/Users/uidj2522/Desktop/RFID_PIC/RFID_PIC/app/app_UART.c</file>
             <file>file:/C:/Users/uidj2522/Desktop/RFID_PIC/RFID_PIC/mcc_generated_files/pin_manager.c</file>
-            <file>file:/C:/Users/uidj2522/Desktop/RFID_PIC/RFID_PIC/app/app_init.h</file>
+            <file>file:/C:/Users/uidj2522/Desktop/RFID_PIC/RFID_PIC/app/app_RC522.h</file>
             <file>file:/C:/Users/uidj2522/Desktop/RFID_PIC/RFID_PIC/periodic_task_exec.c</file>
         </group>
     </open-files>
