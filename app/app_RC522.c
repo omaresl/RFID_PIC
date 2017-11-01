@@ -84,6 +84,7 @@ void app_RC522_TaskMng(void) {
                     /* Reset the Transceiver */
                     re_RC522State = RC522_STATE_INIT;
 
+                    LED_RED_OFF();
                     LED_BLUE_OFF();
                 }
 
@@ -168,6 +169,7 @@ void app_RC522_TaskMng(void) {
                         /*TODO: Access Granted*/
                     } else {
                         /* Do Nothing */
+                        LED_RED_ON();
                     }
 
 
@@ -452,7 +454,8 @@ static T_UBYTE app_RC522_ToCard(T_UBYTE lub_command, T_UBYTE *lpub_sendData, T_U
     for (lub_i = 0; lub_i < lub_sendLen; lub_i++) {
         app_RC522_WriteRegister(FIFODataReg, *(lpub_sendData + lub_i));
     }
-
+    
+    app_RC522_ClearRegisterBitMask(CommIrqReg, 0x80);
     /* Command Execution */
     app_RC522_WriteRegister(CommandReg, lub_command);
     if (lub_command == PCD_Transceive) {
@@ -465,9 +468,11 @@ static T_UBYTE app_RC522_ToCard(T_UBYTE lub_command, T_UBYTE *lpub_sendData, T_U
     APP_RC522_TIMER_LOAD(rub_RC522WatchDog); //Load WatchDog
     do {
         lub_n = app_RC522_ReadRegister(CommIrqReg);
-    } while (/*((lub_n & 0x01) == 0U) &&*/
+    } while (((lub_n & 0x01) == 0U) &&
             ((lub_n & lub_waitIRq) == 0U) &&
             (APP_RC522_TIMER_IS_STOPPED(rub_RC522WatchDog) == FALSE)); //Check watch dog
+    
+    APP_RC522_TIMER_STOP(rub_RC522WatchDog);
 
     /* Stop Transmission */
     app_RC522_ClearRegisterBitMask(BitFramingReg, 0x80);

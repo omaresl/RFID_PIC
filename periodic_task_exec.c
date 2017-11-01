@@ -17,12 +17,12 @@ void periodic_task_4tk(void) {
 }
 
 void periodic_task_8tk(void) {
+    /* RC522 Task */
+    app_RC522_TaskMng();
     return;
 }
 
 void periodic_task_32tk(void) {
-    /* RC522 Task */
-    app_RC522_TaskMng();
     return;
 }
 
@@ -42,11 +42,6 @@ void periodic_task_512tk(void) {
 }
 
 void periodic_task_1024tk(void) {
-    if (app_RC522_ModuleIsFail() == FALSE) {
-        //app_LED_Task();
-    } else {
-        /* Do Nothing */
-    }
     return;
 }
 
