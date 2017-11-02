@@ -22,6 +22,8 @@
 
 const T_UBYTE caub_RC522_Key[APP_RC522_KEY_SIZE] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 const T_UBYTE caub_RC522_TagData[] = "SantaAnitaResidencial";
+const T_UBYTE caub_RC522_OmarWriteTagData[] = "OmarWrt2412";
+const T_UBYTE caub_RC522_OmarEraseTagData[] = "OmarErs1990";
 
 /***************************************
  * Variables						   *
@@ -38,6 +40,8 @@ static T_UBYTE rub_RC522DematureCounter = 0U;
 static T_UBYTE rub_FailureFlag = FALSE;
 static T_UBYTE rub_RC522_TimeoutFlag = FALSE;
 static T_UBYTE rub_EraseRequestFlag = FALSE;
+static T_UBYTE rub_MasterTagFlag = FALSE;
+static T_UBYTE rub_SearchOnGoingFlag = FALSE;
 
 /***************************************
  * Prototypes						   *
@@ -81,14 +85,20 @@ void app_RC522_TaskMng(void) {
                     /* Go to next state after INIT */
                     re_RC522_NextState = RC522_STATE_CARD_SEARCH;
                     re_RC522State = RC522_STATE_GET_ID_CARD;
+
+                    /* Set Search on Going Flag */
+                    rub_SearchOnGoingFlag = FALSE;
                 } else {
                     /* Go to next state after INIT */
                     re_RC522_NextState = RC522_STATE_CARD_SEARCH;
                     /* Reset the Transceiver */
                     re_RC522State = RC522_STATE_INIT;
 
+                    /* Set Search on Going Flag */
+                    rub_SearchOnGoingFlag = TRUE;
+
+                    LED_GREEN_OFF();
                     LED_RED_OFF();
-                    LED_BLUE_OFF();
                 }
 
             }
@@ -155,11 +165,28 @@ void app_RC522_TaskMng(void) {
                 if (app_RC522_ReadBlock(lub_BlockAddress, raub_RC522_FIFOData, &ruw_RC522_FIFOReceivedLength) == STATUS_OK) {
                     /* Check if Tag Data is valid */
                     if (app_RC522_CompareData(&raub_RC522_FIFOData, &caub_RC522_TagData, ruw_RC522_FIFOReceivedLength) == TRUE) {
+                        /* Clear Master Tag Flag */
+                        rub_MasterTagFlag = FALSE;
                         LED_RED_OFF();
-                        LED_BLUE_ON();
+                        LED_BLUE_OFF();
+                        LED_GREEN_ON();
                         /*TODO: Access Granted*/
+                    }
+                    else if (app_RC522_CompareData(&raub_RC522_FIFOData, &caub_RC522_OmarWriteTagData, ruw_RC522_FIFOReceivedLength) == TRUE) {
+                        rub_MasterTagFlag = TRUE;
+                        app_RC522_WriteRequest();
+                        LED_BLUE_ON();
+                    } else if (app_RC522_CompareData(&raub_RC522_FIFOData, &caub_RC522_OmarEraseTagData, ruw_RC522_FIFOReceivedLength) == TRUE) {
+                        rub_MasterTagFlag = TRUE;
+                        app_RC522_EraseRequest();
+                        LED_RED_ON();
+                        LED_BLUE_ON();
                     } else {
-                        /* Do Nothing */
+                        /* Clear Master Tag Flag */
+                        rub_MasterTagFlag = FALSE;
+
+                        /* Leds Off */
+                        LED_GREEN_OFF();
                         LED_BLUE_OFF();
                         LED_RED_ON();
                     }
@@ -169,8 +196,8 @@ void app_RC522_TaskMng(void) {
 
                 }
 
-                /*Check if Write Request Exists*/
-                if (rub_WriteRequestFlag == TRUE) {
+                /*Check if Write Request Exists and the TAG Selected s not a master tag*/
+                if (rub_WriteRequestFlag == TRUE && rub_MasterTagFlag == FALSE) {
                     /* Go to next state after INIT */
                     re_RC522_NextState = RC522_STATE_CARD_SEARCH;
                     /* Reset the Transceiver */
@@ -188,6 +215,7 @@ void app_RC522_TaskMng(void) {
             {
                 rub_WriteRequestFlag = FALSE;
                 (void) app_RC522_WriteBlock(4U, raub_RC522_FIFOData, &ruw_RC522_FIFOReceivedLength);
+                rub_EraseRequestFlag = FALSE;
                 /* Go to next state after INIT */
                 re_RC522_NextState = RC522_STATE_CARD_SEARCH;
                 /* Reset the Transceiver */
@@ -217,7 +245,6 @@ void app_RC522_Init(void) {
 
     //Config RST PIN
     APP_RC_522_RESET_SET_PIN(); //Reset Module
-
 
     //Config MX PIN
 
@@ -650,7 +677,6 @@ static T_UBYTE app_RC522_WriteBlock(T_UBYTE lub_BlockAddr, T_UBYTE *lpub_recvDat
             } else {
                 lpub_recvData[i] = caub_RC522_TagData[i];
             }
-
         }
         app_RC522_CalculateCRC(lpub_recvData, 16, &lpub_recvData[16]);
         lub_status = app_RC522_ToCard(PCD_Transceive, lpub_recvData, 18, lpub_recvData, luw_unLen);
@@ -727,7 +753,7 @@ static T_UBYTE app_RC522_CompareData(T_UBYTE *lpub_A, T_UBYTE *lpub_B, T_UBYTE l
     lub_Result = TRUE;
 
     /* Compare each byte */
-    for (T_UBYTE lub_i; lub_i < lub_Length; lub_i++) {
+    for (T_UBYTE lub_i = 0; lub_i < lub_Length; lub_i++) {
         if (*(lpub_A + lub_i) != *(lpub_B + lub_i)) {
             /* Difference */
             lub_Result = FALSE;
@@ -752,4 +778,12 @@ void app_RC522_WriteRequest(void) {
 void app_RC522_EraseRequest(void) {
     rub_WriteRequestFlag = TRUE;
     rub_EraseRequestFlag = TRUE;
+}
+
+/**********************************************************
+ * Name: app_RC522_SearchOnGoing
+ * Description: TBD
+ **********************************************************/
+T_UBYTE app_RC522_SearchOnGoing(void) {
+    return rub_SearchOnGoingFlag;
 }

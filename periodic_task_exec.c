@@ -26,16 +26,17 @@ void periodic_task_32tk(void) {
     if(IO_RD0_GetValue() == FALSE)
     {
         app_RC522_WriteRequest();
-        LED_GREEN_ON();
+        LED_BLUE_ON();
     }
     else if(IO_RD2_GetValue() == FALSE)
     {
         app_RC522_EraseRequest();
-        LED_GREEN_ON();
+        LED_RED_ON();
+        LED_BLUE_ON();
     }
     else
     {
-        LED_GREEN_OFF();
+        
     }
     return;
 }
@@ -56,6 +57,13 @@ void periodic_task_512tk(void) {
 }
 
 void periodic_task_1024tk(void) {
+    if (app_RC522_ModuleIsFail() == FALSE && app_RC522_SearchOnGoing() == TRUE) {
+        LED_RED_OFF();
+        LED_GREEN_OFF();
+        LED_BLUE_TOOGLE();
+    } else {
+        LED_BLUE_OFF();
+    }
     return;
 }
 

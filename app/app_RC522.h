@@ -115,7 +115,7 @@ INTERRUPT_GlobalInterruptHighEnable()
                                             rub_RC522_TimeoutFlag = FALSE
 
 /* Error Manager */
-#define APP_RC522_COUNT_FOR_ERROR           ((T_UBYTE)10U)
+#define APP_RC522_COUNT_FOR_ERROR           ((T_UBYTE)100U)
 #define APP_RC522_MODULE_IS_FAIL()          ((T_UBYTE)(rub_ErrorMatureCounter >= APP_RC522_COUNT_FOR_ERROR))
 
 /******************************************************************************
@@ -211,5 +211,6 @@ extern void app_RC522_TimeoutTask(void);
 extern T_UBYTE app_RC522_ModuleIsFail(void);
 extern void app_RC522_WriteRequest(void);
 extern void app_RC522_EraseRequest(void);
+extern T_UBYTE app_RC522_SearchOnGoing(void);
 
 #endif /* APP_RC522_H_ */
