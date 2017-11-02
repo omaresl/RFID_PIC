@@ -769,6 +769,7 @@ static T_UBYTE app_RC522_CompareData(T_UBYTE *lpub_A, T_UBYTE *lpub_B, T_UBYTE l
  **********************************************************/
 void app_RC522_WriteRequest(void) {
     rub_WriteRequestFlag = TRUE;
+    rub_EraseRequestFlag = FALSE;
 }
 
 /**********************************************************

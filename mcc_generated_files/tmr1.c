@@ -79,8 +79,8 @@ void TMR1_Initialize(void)
     //CS FOSC/4; 
     T1CLK = 0x01;
 
-    //TMR1H 224; 
-    TMR1H = 0xE0;
+    //TMR1H 99; 
+    TMR1H = 0x63;
 
     //TMR1L 192; 
     TMR1L = 0xC0;
